@@ -1,3 +1,4 @@
+**pour trouver les informations nécéssaires quant à la mise en page au format .md, suivre ce lien :**(https://docs.github.com/fr/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#links)
 # Journée du 15 avril
 ## matinée
 Découverte des locaux du laboratoire, présentation des différentes personnes présentes ce jour. Installation au sein des bureaux.
