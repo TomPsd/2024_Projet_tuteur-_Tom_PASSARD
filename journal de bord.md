@@ -44,8 +44,8 @@ Découverte de l'ensemble du classement harmonized system sur le site de l'organ
 P.S: il faut encore chercher de la bibliographie sur la planification bioéconomique de l'union Européenne (horizon 2030 et 2050 notamment, et comparaison du chemin parcouru avec l'horizon 2020 pour se figurer l'évolution de la tendance européenne). 
 # Journée du 24 avril
 ## Matinée
-Réalisation d'une liste complète des produits bois et produits dérivés du bois avec leur code HS (harmonized system) respectif depuis le site WEB de l'organisation mondiale des douanes. 
+Réalisation d'une liste complète des produits bois et produits dérivés du bois avec leurs codes HS (harmonized system) respectifs depuis le site WEB de l'organisation mondiale des douanes. 
 ## Après-midi 
-Finalisation de la liste entreprise durant la matinée et sélection des produits les plus pertinents vis-à-vis du sujet d'étude choisi (reste encore à confirmer le choix des produits via la disponibilité des données pour ceux-ci sur les différentes bases de données UN Comtrade et FAOSTAT. 
-Poursuite de l'extraction des informations pertinentes au sein des oeuvres bibliographiques recherchées pour constituer les connaissances sur le sujet. 
+Finalisation de la liste entreprise durant la matinée et sélection des produits les plus pertinents vis-à-vis du sujet d'étude choisi (reste encore à confirmer le choix des produits via la disponibilité des données sur les différentes bases de données UN Comtrade et FAOSTAT). 
+Poursuite de l'extraction des informations pertinentes au sein des oeuvres bibliographiques regroupées plus tôt pour constituer les connaissances sur le sujet. 
 Mise à jour du journal de bord en fin de journée
