@@ -49,3 +49,8 @@ Réalisation d'une liste complète des produits bois et produits dérivés du bo
 Finalisation de la liste entreprise durant la matinée et sélection des produits les plus pertinents vis-à-vis du sujet d'étude choisi (reste encore à confirmer le choix des produits via la disponibilité des données sur les différentes bases de données UN Comtrade et FAOSTAT). 
 Poursuite de l'extraction des informations pertinentes au sein des oeuvres bibliographiques regroupées plus tôt pour constituer les connaissances sur le sujet. 
 Mise à jour du journal de bord en fin de journée
+# Journée du 25 avril
+## Matinée
+Vérification de certaies données sur UN Comtrade et FAOSTAT et vérification des données miroir. Problème relevé : la quasi-totalité des données étudiées semblent montrer des écarts significatifs entre les valeurs imports enregistrées et les valeurs d'exports enregistrées par les deux pays effectuant le commerce. 
+Récupération du script automatisé pour le téléchargement des données de la base UN Comtrade. Installation de Anaconda 3 pour réaliser cette tâche. Synchronisation des fichiers du script avec le repository GitHub. 
+## Après-midi
