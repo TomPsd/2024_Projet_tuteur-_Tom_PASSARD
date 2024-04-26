@@ -56,3 +56,8 @@ Récupération du script automatisé pour le téléchargement des données de la
 ## Après-midi
 Correction et compréhension du script automatisé, récupération des données de la base UN Comtrade (le script fonctione correctement). Début de réflexion sur le tri des données à effectuer depuis le jeu de données brut téléchargé avec les fonctions de R studio, et réflexion sur les groupes de données à constituer. Réflexion également sur les méthodes statistiques à mobiliser et quels produits utiliser pour obtenir une reproductibilité correcte et des résultats exploitables.
 Il reste désormais à commencer l'exploitation des données de la base FAOSTAT, mais le package R studio permettant l'automatisation du téléchargement n'existe plus. Il est possible en attendant de récupérer les donées une par une avec le click button de la page WEB, en attendant de trouver une méthode automatisée efficace.
+# Journée du 26 avril
+## Matinée
+Rechecrhe de nouveaux articles en lien avec le sujet pour combler le manque d'informations
+## Après-midi
+Lecture d'articles scientifiques recherchés précedemment et extraction des informations importantes et pertinentes
