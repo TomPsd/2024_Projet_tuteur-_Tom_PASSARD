@@ -61,3 +61,9 @@ Il reste désormais à commencer l'exploitation des données de la base FAOSTAT,
 Rechecrhe de nouveaux articles en lien avec le sujet pour combler le manque d'informations
 ## Après-midi
 Lecture d'articles scientifiques recherchés précedemment et extraction des informations importantes et pertinentes
+# Journée du 29 avril
+## Matinée
+Bibliographie et rédaction des informations pertinentes
+## Après-midi
+Bibliographie et rédaction des informations pertinentes
+P.S : de nombreux documents présentent visiblement les connaissances nécessaires au sujet, mais nécessitent un long temps de lecture et de tri en raison du grand nombre d'informations connexes au thème, mais qui ne concernent pas le bois et les produits bois, ainsi que leurs différents marchés (par exemple le biocommerce ne concerne pas seulement la forêt alors qu'il est un élément essentiel pour la compréhension du sujet du stage).
