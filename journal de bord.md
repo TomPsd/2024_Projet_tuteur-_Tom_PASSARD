@@ -67,3 +67,20 @@ Bibliographie et rédaction des informations pertinentes
 ## Après-midi
 Bibliographie et rédaction des informations pertinentes
 P.S : de nombreux documents présentent visiblement les connaissances nécessaires au sujet, mais nécessitent un long temps de lecture et de tri en raison du grand nombre d'informations connexes au thème, mais qui ne concernent pas le bois et les produits bois, ainsi que leurs différents marchés (par exemple le biocommerce ne concerne pas seulement la forêt alors qu'il est un élément essentiel pour la compréhension du sujet du stage).
+# Journée du 30 avril
+## Matinée
+Bibliographie, lecture des documents européens sur la structure de la forêt et des actions à mener
+## Après-midi
+Bibliographie, lecture des documents européens sur la structure de la forêt et des actions à mener
+# Journée du 2 mai 
+## Matinée
+Bibliographie, lecture des documents européens sur la structure de la forêt et des actions à mener
+## Après-midi
+Bibliographie, lecture des documents européens sur la structure de la forêt et des actions à mener
+# Journée du 3 mai
+## Matinée
+Bibliographie, lecture des documents européens sur la structure de la forêt et des actions à mener
+## Après-midi
+Bibliographie, lecture des documents européens sur la structure de la forêt et des actions à mener. Mise à jour du journal de bord (un certain retard avait été pris). Les informations concernant les objectifs de l'UE commencent à se préciser. Le script R va pouvoir être travaillé, il manque seulement quelques recherches permettant de justifier l'utilisation de tel ou tel produit forestier pour les études statistiques qui seront menées (ces produits seront certainement le pellet, le bois de charpente, l'OSB, et un dernier produit encore à définir (pourquoi pas le bois rond)).
+
+Cependant, j'ai quelques réserves sur la quantité d'informations récoltées en lien avec le sujet. J'ai l'impression de ne pas avoir suffisamment de détails pour justifier les études statistiques et rédiger un rapport suffisamment complet. De plus, j'ai pris un peu de retard que je dois rattraper rapidement.
