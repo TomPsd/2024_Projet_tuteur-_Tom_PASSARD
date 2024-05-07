@@ -84,3 +84,15 @@ Bibliographie, lecture des documents européens sur la structure de la forêt et
 Bibliographie, lecture des documents européens sur la structure de la forêt et des actions à mener. Mise à jour du journal de bord (un certain retard avait été pris). Les informations concernant les objectifs de l'UE commencent à se préciser. Le script R va pouvoir être travaillé, il manque seulement quelques recherches permettant de justifier l'utilisation de tel ou tel produit forestier pour les études statistiques qui seront menées (ces produits seront certainement le pellet, le bois de charpente, l'OSB, et un dernier produit encore à définir (pourquoi pas le bois rond)).
 
 Cependant, j'ai quelques réserves sur la quantité d'informations récoltées en lien avec le sujet. J'ai l'impression de ne pas avoir suffisamment de détails pour justifier les études statistiques et rédiger un rapport suffisamment complet. De plus, j'ai pris un peu de retard que je dois rattraper rapidement.
+# Journée du 6 mai
+## Matinée 
+bibliographie
+## Après-midi
+bibliographie
+# Journée du 7 mai
+## Matinée 
+Bibliographie
+## Après-midi
+Détermination de 5-6 produits bois pertinents pour l'étude et bibliographie en conséquence pour expliquer leur choix et leur pertinence dans l'étude statistique
+Mise à jour du Script R pour préparer de manière organisée la rédaction du code en fonction des différents produits
+Mise à jour du journal de bord
