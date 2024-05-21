@@ -96,3 +96,15 @@ Bibliographie
 Détermination de 5-6 produits bois pertinents pour l'étude et bibliographie en conséquence pour expliquer leur choix et leur pertinence dans l'étude statistique
 Mise à jour du Script R pour préparer de manière organisée la rédaction du code en fonction des différents produits
 Mise à jour du journal de bord
+# Journée du 10 mai
+## Matinée
+Bibliographie
+## Après-midi
+Bibliographie
+# Journée du 21 mai
+## Matinée
+Réunion pour faire un point sur l'avancement du stage et des différents problèmes rencontrés jusqu'à présent + plus précision sur certains points flous et éléments de réponses supplémentaires obtenus
+Téléchargement des jeu de données
+## Après-midi
+Téléchargement des jeux de données (les données UN Comtrade sont finies d'être téléchargées)
+début de la manipulation des jeux de données
