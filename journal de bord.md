@@ -108,3 +108,8 @@ Téléchargement des jeu de données
 ## Après-midi
 Téléchargement des jeux de données (les données UN Comtrade sont finies d'être téléchargées)
 début de la manipulation des jeux de données
+# Journée du 22 mai
+## Matinée
+amélioration du script sur R studio
+## Après-midi
+Amélioration du script sur R Studio
