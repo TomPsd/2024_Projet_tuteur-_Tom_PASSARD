@@ -64,7 +64,7 @@ all(dim(data) == dim(trade_data)) # if TRUE: same dimensions
 # The two dataframes are not exactly equals: some minor differences remain
 # To check differences, use: all.equal(data, trade_data)
 
-#####IMPOTATION DU JEU DE DONNEES 4418#####
+#####IMPORTATION DU JEU DE DONNEES 4418#####
 
 # Indicate anaconda environment
 use_condaenv( "C:/Users/Stagiaire/anaconda3/python.exe" )
@@ -366,16 +366,115 @@ UE_27 = c('Austria','Belgium','Bulgaria','Croatia','Cyprus',
           'Lithuania','Luxembourg','Malta','Netherlands','Poland',
           'Portugal','Romania','Slovakia','Slovenia','Spain','Sweden')
 ###CREATION DES DIFFERENTS SOUS-ENSEMBLES POUR ANALYSE###
+pattern <- paste(UE_27, collapse="|")
+##PRODUIT 440131##
+
+#EXPORTATION UE27 DE 440131#
+EXPORT_UE27_440131 <- mirror_flow_440131[grepl(pattern, mirror_flow_440131$reporterDesc)&
+                                           !(grepl(pattern, mirror_flow_440131$partnerDesc)),]
+EXPORT_UE27_440131$primaryValue.x<-as.numeric(EXPORT_UE27_440131$primaryValue.x)
+EXPORT_UE27_440131$primaryValue.y<-as.numeric(EXPORT_UE27_440131$primaryValue.y)
+str(EXPORT_UE27_440131)
+#IMPORTATION UE27 DE 440131#
+IMPORT_UE27_440131 <- mirror_flow_440131[!(grepl(pattern, mirror_flow_440131$reporterDesc))&
+                                           grepl(pattern, mirror_flow_440131$partnerDesc),]
+IMPORT_UE27_440131$primaryValue.x<-as.numeric(IMPORT_UE27_440131$primaryValue.x)
+IMPORT_UE27_440131$primaryValue.y<-as.numeric(IMPORT_UE27_440131$primaryValue.y)
+str(IMPORT_UE27_440131)
+##PRODUIT 4418##
+
+#EXPORTATION UE27 DE 4418#
+EXPORT_UE27_4418 <- mirror_flow_4418[grepl(pattern, mirror_flow_4418$reporterDesc)&
+                                           !(grepl(pattern, mirror_flow_4418$partnerDesc)),]
+EXPORT_UE27_4418$primaryValue.x<-as.numeric(EXPORT_UE27_4418$primaryValue.x)
+EXPORT_UE27_4418$primaryValue.y<-as.numeric(EXPORT_UE27_4418$primaryValue.y)
+str(EXPORT_UE27_4418)
+#IMPORTATION UE27 DE 4418#
+IMPORT_UE27_4418 <- mirror_flow_4418[!(grepl(pattern, mirror_flow_4418$reporterDesc))&
+                                           grepl(pattern, mirror_flow_4418$partnerDesc),]
+IMPORT_UE27_4418$primaryValue.x=as.numeric(IMPORT_UE27_4418$primaryValue.x)
+IMPORT_UE27_4418$primaryValue.y=as.numeric((IMPORT_UE27_4418$primaryValue.y))
+str(IMPORT_UE27_4418)
+
+##PRODUIT 4412##
+
+#EXPORTATION UE27 DE 4412#
+EXPORT_UE27_4412 <- mirror_flow_4412[grepl(pattern, mirror_flow_4412$reporterDesc)&
+                                       !(grepl(pattern, mirror_flow_4412$partnerDesc)),]
+EXPORT_UE27_4412$primaryValue.x=as.numeric(EXPORT_UE27_4412$primaryValue.x)
+EXPORT_UE27_4412$primaryValue.y=as.numeric(EXPORT_UE27_4412$primaryValue.y)
+str(EXPORT_UE27_4412)
+#IMPORTATION UE27 DE 4412#
+IMPORT_UE27_4412 <- mirror_flow_4412[!(grepl(pattern, mirror_flow_4412$reporterDesc))&
+                                       grepl(pattern, mirror_flow_4412$partnerDesc),]
+IMPORT_UE27_4412$primaryValue.x=as.numeric(IMPORT_UE27_4412$primaryValue.x)
+IMPORT_UE27_4412$primaryValue.y=as.numeric(IMPORT_UE27_4412$primaryValue.y)
+str(IMPORT_UE27_4412)
+##PRODUIT 4410##
+
+#EXPORTATION UE27 DE 4410#
+EXPORT_UE27_4410 <- mirror_flow_4410[grepl(pattern, mirror_flow_4410$reporterDesc)&
+                                       !(grepl(pattern, mirror_flow_4410$partnerDesc)),]
+EXPORT_UE27_4410$primaryValue.x=as.numeric(EXPORT_UE27_4410$primaryValue.x)
+EXPORT_UE27_4410$primaryValue.y=as.numeric(EXPORT_UE27_4410$primaryValue.y)
+str(EXPORT_UE27_4410)
+#IMPORTATION UE27 DE 4410#
+IMPORT_UE27_4410 <- mirror_flow_4410[!(grepl(pattern, mirror_flow_4410$reporterDesc))&
+                                       grepl(pattern, mirror_flow_4410$partnerDesc),]
+IMPORT_UE27_4410$primaryValue.x=as.numeric(IMPORT_UE27_4410$primaryValue.x)
+IMPORT_UE27_4410$primaryValue.y=as.numeric(IMPORT_UE27_4410$primaryValue.y)
+str(IMPORT_UE27_4410)
+#PRODUIT 4406#
+#EXPORTATION UE27 DE 4406#
+EXPORT_UE27_4406 <- mirror_flow_4406[grepl(pattern, mirror_flow_4406$reporterDesc)&
+                                       !(grepl(pattern, mirror_flow_4406$partnerDesc)),]
+EXPORT_UE27_4406$primaryValue.x=as.numeric(EXPORT_UE27_4406$primaryValue.x)
+EXPORT_UE27_4406$primaryValue.y=as.numeric(EXPORT_UE27_4406$primaryValue.y)
+str(EXPORT_UE27_4406)
+#IMPORTATION UE27 DE 4406#
+IMPORT_UE27_4406<- mirror_flow_4406[!(grepl(pattern, mirror_flow_4406$reporterDesc))&
+                                       grepl(pattern, mirror_flow_4406$partnerDesc),]
+IMPORT_UE27_4406$primaryValue.x=as.numeric(IMPORT_UE27_4406$primaryValue.x)
+IMPORT_UE27_4406$primaryValue.y=as.numeric(IMPORT_UE27_4406$primaryValue.y)
+str(IMPORT_UE27_4406)
+
+###ANALYSE DES GROUPES DE DONNEES TRIES###
+install.packages('dplyr')
+library('dplyr')
 
 ##PRODUIT 440131##
-pattern <- paste(UE_27, collapse="|")
-UE_27_440131_interne <- data[grepl(pattern, data$reporterDesc) & 
-                       grepl(pattern,data$partnerDesc), ]
-###vérifier que la compréhension des données est bonne, est ce qu'on peut 
-## effectuer ce tri à partir du tableau des données miroir ou faut-il se baser
-## sur les tableaux data nettoyés? 
-ue_27_commerce <- data[grepl(pattern,data$reporterDesc)&
-                         !(grepl(pattern,data$partnerDesc)),]
-monde_europe_commerce <- data[!(grepl(pattern,data$reporterDesc))&
-                                !(grepl(pattern,data$partnerDesc)),]
+#EXPORT#
+yr_pays_EXPORT_UE27_440131 <- EXPORT_UE27_440131 %>%
+  group_by(period, partnerDesc) %>%
+  summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
+            totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(period,desc(totalValue_y))
 
+TOTAL_EXPORT_UE27_440131<- yr_pays_EXPORT_UE27_440131%>%
+  group_by(period)%>%
+  summarise(IMPORT = sum(totalValue_y),
+            EXPORT = sum(totalValue_x))%>%
+  arrange(period)
+
+top_EXPORT_UE27_440131 <- yr_pays_EXPORT_UE27_440131 %>%
+  group_by(period) %>%
+  slice_max(totalValue_y, n = 10) %>%
+  ungroup()
+
+#IMPORT#
+yr_pays_IMPORT_UE27_440131 <- IMPORT_UE27_440131 %>%
+  group_by(period, reporterDesc) %>%
+  summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
+            totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(period,desc(totalValue_y))
+
+TOTAL_IMPORT_UE27_440131<- yr_pays_IMPORT_UE27_440131%>%
+  group_by(period)%>%
+  summarise(IMPORT = sum(totalValue_y),
+            EXPORT = sum(totalValue_x))%>%
+  arrange(period)
+
+top_IMPORT_UE27_440131 <- yr_pays_IMPORT_UE27_440131 %>%
+  group_by(period) %>%
+  slice_max(totalValue_y, n = 10) %>%
+  ungroup()
