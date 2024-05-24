@@ -279,7 +279,7 @@ all(dim(data5) == dim(trade_data_5)) # if TRUE: same dimensions
 #########################################################################
 #########################################################################
 
-#####MISE EN FORME DES JEUX DE DONNEES ET EXPLOITATION DES INFORMATIONS#####
+#####MISE EN FORME DES JEUX DE DONNEES#####
 
 ###RAPPEL DES JEUX DE DONNEES###
 data = read.csv2("./raw_data/data_440131.csv",sep = ",")
@@ -438,7 +438,7 @@ IMPORT_UE27_4406$primaryValue.x=as.numeric(IMPORT_UE27_4406$primaryValue.x)
 IMPORT_UE27_4406$primaryValue.y=as.numeric(IMPORT_UE27_4406$primaryValue.y)
 str(IMPORT_UE27_4406)
 
-###ANALYSE DES GROUPES DE DONNEES TRIES###
+######ANALYSE DES GROUPES DE DONNEES#####
 install.packages('dplyr')
 library('dplyr')
 
