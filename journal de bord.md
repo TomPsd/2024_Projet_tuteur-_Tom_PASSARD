@@ -114,9 +114,16 @@ amélioration du script sur R studio
 ## Après-midi
 Amélioration du script sur R Studio
 # Journée du 23 mai
-# Matinée
+## Matinée
 Amélioration et ajouts d'éléments dans le script R studio
 Beaucoup de temps a été passé sur la compréhension des données miroir, à partir desquelles les études statistiques sont censées être menées. Heureusement, le principe est désormais compris.
-# Après-midi
+## Après-midi
 Amélioration et ajouts d'éléments dans le sript R studio
 Début de la rédaction de la partie matériels et méthodes selon les consignes données par les enseignants responsables du module 8.01, et les conseils du tuteur de stage. Il faudra consacrer la journée de demain à la rédaction du premier jet, beaucoup de temps ayant été passé sur le script (voir mise à jour du 23 mai).
+# Journée du 24 mai
+## Matinée
+Rédaction du premier jet de la partie matériels et méthodes du rapport de stage. 
+Etude préalable des données FAOstat nécessaires pour compléter les données de UN Comtrade. 
+## Après-midi
+Rédaction du premier jet de la partie matériels et méthodes du rapport de stage
+Mise à jour mineure du script R studio
