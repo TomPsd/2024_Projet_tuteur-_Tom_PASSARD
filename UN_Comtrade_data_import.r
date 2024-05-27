@@ -478,3 +478,31 @@ top_IMPORT_UE27_440131 <- yr_pays_IMPORT_UE27_440131 %>%
   group_by(period) %>%
   slice_max(totalValue_y, n = 10) %>%
   ungroup()
+
+##PRODUIT 4418##
+#EXPORT#
+yr_pays_EXPORT_UE27_4418 <- EXPORT_UE27_4418 %>%
+  group_by(period, partnerDesc) %>%
+  summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
+            totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(period,desc(totalValue_y))
+
+TOTAL_EXPORT_UE27_4418<- yr_pays_EXPORT_UE27_4418%>%
+  group_by(period)%>%
+  summarise(IMPORT = sum(totalValue_y),
+            EXPORT = sum(totalValue_x))%>%
+  arrange(period)
+
+
+
+top_EXPORT_UE27_4418 <- yr_pays_EXPORT_UE27_4418 %>%
+  group_by(period) %>%
+  slice_max(totalValue_y, n = 10) %>%
+  ungroup()
+
+top_EXPORT_UE27_4418_2 <- yr_pays_EXPORT_UE27_4418 %>%
+  group_by(period) %>%
+  slice_max(totalValue_x, n = 10) %>%
+  ungroup()
+
+#IMPORT
