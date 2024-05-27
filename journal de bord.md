@@ -127,3 +127,8 @@ Etude préalable des données FAOstat nécessaires pour compléter les données 
 ## Après-midi
 Rédaction du premier jet de la partie matériels et méthodes du rapport de stage
 Mise à jour mineure du script R studio
+# Journée du 27 mai
+## Matinée
+mise à jour du code R et rélexion de l'introduction
+## Après-midi
+mise à jour du code R et réflexion de l'introduction pour le rapport, lecture des retours sur la partie matériels et méthodes
