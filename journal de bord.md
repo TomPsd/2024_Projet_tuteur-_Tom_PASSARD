@@ -132,3 +132,11 @@ Mise à jour mineure du script R studio
 mise à jour du code R et rélexion de l'introduction
 ## Après-midi
 mise à jour du code R et réflexion de l'introduction pour le rapport, lecture des retours sur la partie matériels et méthodes
+# Journée du 28 mai
+## Matinée
+correction matériels et méthode
+début de rédaction introduction
+## Après-midi
+correction matériels et méthode
+mise à jour du script R
+réflexion sur une possible MAJ des codes produits à prendre en compte dans l'étude
