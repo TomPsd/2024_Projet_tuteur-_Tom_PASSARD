@@ -64,6 +64,11 @@ all(dim(data) == dim(trade_data)) # if TRUE: same dimensions
 # The two dataframes are not exactly equals: some minor differences remain
 # To check differences, use: all.equal(data, trade_data)
 
+#####CITATION DES PACKAGES UTILISES#####
+citation("comtradeapicall")
+citation("reticulate")
+citation("rstudioapi")
+citation("ggplot2")
 #####IMPORTATION DU JEU DE DONNEES 4418#####
 
 # Indicate anaconda environment
@@ -223,7 +228,7 @@ all(dim(data4) == dim(trade_data_4)) # if TRUE: same dimensions
 # The two dataframes are not exactly equals: some minor differences remain
 # To check differences, use: all.equal(data, trade_data)
 
-#####IMPORTATION DU JEU DE DONNEES 4406#####
+#####IMPORTATION DU JEU DE DONNEES 4407#####
 
 # Indicate anaconda environment
 use_condaenv( "C:/Users/Stagiaire/anaconda3/python.exe" )
@@ -243,7 +248,7 @@ for (file in list.files(path = dir, pattern = ".py")){
 apikey <- readLines(list.files(path = dir, pattern = ".txt"))
 # Set up parameters
 years <- 2000 : 2020
-cmd_code <- paste(sort(c( "4406")),
+cmd_code <- paste(sort(c( "4407")),
                   sep = "",
                   collapse = ",")
 flow_code <- paste(sort(c("M","X")),
@@ -269,26 +274,21 @@ print(paste0("Flows considered: ",
 ###EXPORTATION DES JEUX DE DONNEES ET VERIFICATIONS###
 # Export data as a csv file
 write.csv(trade_data_5,
-          "./raw_data/data_4406.csv",
+          "./raw_data/data_4407.csv",
           row.names = FALSE)
 
 all(dim(data5) == dim(trade_data_5)) # if TRUE: same dimensions
 # The two dataframes are not exactly equals: some minor differences remain
 # To check differences, use: all.equal(data, trade_data)
 
-#########################################################################
-#########################################################################
-
-#####MISE EN FORME DES JEUX DE DONNEES#####
-
-###RAPPEL DES JEUX DE DONNEES###
+#####RAPPEL DES JEUX DE DONNEES#####
 data = read.csv2("./raw_data/data_440131.csv",sep = ",")
 data2 = read.csv2("./raw_data/data_4418.csv",sep = ",")
 data3 = read.csv2("./raw_data/data_4412.csv",sep = ",")
 data4 = read.csv2("./raw_data/data_4410.csv",sep = ",")
-data5 = read.csv2("./raw_data/data_4406.csv",sep = ",")
+data5 = read.csv2("./raw_data/data_4407.csv",sep = ",")
 
-###NETTOYAGE DES DONNEES###
+#####NETTOYAGE DES DONNEES#####
 toMatch = c('\\d','XX','_X')
 
 data = data[!(grepl(paste(toMatch,collapse="|"), data$reporterISO)) &
@@ -307,7 +307,7 @@ data5 = data5[!(grepl(paste(toMatch,collapse="|"), data5$reporterISO)) &
        !(grepl(paste(toMatch,collapse="|"), data5$partnerISO)),]
 
 
-###RAPPEL DES TABLEAUX IMPORT/EXPORT###
+#####RAPPEL DES TABLEAUX IMPORT/EXPORT#####
 export_440131 = data[(data$flowCode == "X"),]
 import_440131 = data[(data$flowCode == "M"),]
 
@@ -320,10 +320,10 @@ import_4412 = data3[(data3$flowCode == "M"),]
 export_4410 = data4[(data4$flowCode == "X"),]
 import_4410 = data4[(data4$flowCode == "M"),]
 
-export_4406 = data5[(data5$flowCode == "X"),]
-import_4406 = data5[(data5$flowCode == "M"),]
+export_4407 = data5[(data5$flowCode == "X"),]
+import_4407 = data5[(data5$flowCode == "M"),]
 
-###RAPPEL DES DONNEES MIROIR###
+#####RAPPEL DES DONNEES MIROIR#####
 mirror_flow_440131 = merge(x= export_440131[c("cmdCode","period","reporterDesc","partnerDesc","primaryValue")],
                            y= import_440131[c("cmdCode","period","reporterDesc","partnerDesc","primaryValue")],
                            by.x=c("cmdCode", "period", "reporterDesc", "partnerDesc"),
@@ -352,21 +352,23 @@ mirror_flow_4410 = merge(x= export_4410[c("cmdCode","period","reporterDesc","par
                          all.x = TRUE, all.y = TRUE)
 sum(is.na(mirror_flow_4410))
 
-mirror_flow_4406 = merge(x= export_4406[c("cmdCode","period","reporterDesc","partnerDesc","primaryValue")],
-                         y= import_4406[c("cmdCode","period","reporterDesc","partnerDesc","primaryValue")],
+mirror_flow_4407 = merge(x= export_4407[c("cmdCode","period","reporterDesc","partnerDesc","primaryValue")],
+                         y= import_4407[c("cmdCode","period","reporterDesc","partnerDesc","primaryValue")],
                          by.x=c("cmdCode", "period", "reporterDesc", "partnerDesc"),
                          by.y=c("cmdCode", "period", "partnerDesc", "reporterDesc"),
                          all.x = TRUE, all.y = TRUE)
-sum(is.na(mirror_flow_4406))
+sum(is.na(mirror_flow_4407))
 
-###CREATION D'UN VECTEUR UE27 REGROUPANT LES 27 PAYS MEMBRES DE L'UE###
+#####CREATION D'UN VECTEUR UE27 REGROUPANT LES 27 PAYS MEMBRES DE L'UE#####
 UE_27 = c('Austria','Belgium','Bulgaria','Croatia','Cyprus',
           'Czech Republic','Denmark','Estonia','Finland','France',
           'Germany','Greece','Hungary','Ireland','Italy','Latvia',
           'Lithuania','Luxembourg','Malta','Netherlands','Poland',
           'Portugal','Romania','Slovakia','Slovenia','Spain','Sweden')
-###CREATION DES DIFFERENTS SOUS-ENSEMBLES POUR ANALYSE###
 pattern <- paste(UE_27, collapse="|")
+
+#####CREATION DES DIFFERENTS SOUS-ENSEMBLES POUR ANALYSE#####
+
 ##PRODUIT 440131##
 
 #EXPORTATION UE27 DE 440131#
@@ -424,25 +426,32 @@ IMPORT_UE27_4410 <- mirror_flow_4410[!(grepl(pattern, mirror_flow_4410$reporterD
 IMPORT_UE27_4410$primaryValue.x=as.numeric(IMPORT_UE27_4410$primaryValue.x)
 IMPORT_UE27_4410$primaryValue.y=as.numeric(IMPORT_UE27_4410$primaryValue.y)
 str(IMPORT_UE27_4410)
-#PRODUIT 4406#
-#EXPORTATION UE27 DE 4406#
-EXPORT_UE27_4406 <- mirror_flow_4406[grepl(pattern, mirror_flow_4406$reporterDesc)&
-                                       !(grepl(pattern, mirror_flow_4406$partnerDesc)),]
-EXPORT_UE27_4406$primaryValue.x=as.numeric(EXPORT_UE27_4406$primaryValue.x)
-EXPORT_UE27_4406$primaryValue.y=as.numeric(EXPORT_UE27_4406$primaryValue.y)
-str(EXPORT_UE27_4406)
-#IMPORTATION UE27 DE 4406#
-IMPORT_UE27_4406<- mirror_flow_4406[!(grepl(pattern, mirror_flow_4406$reporterDesc))&
-                                       grepl(pattern, mirror_flow_4406$partnerDesc),]
-IMPORT_UE27_4406$primaryValue.x=as.numeric(IMPORT_UE27_4406$primaryValue.x)
-IMPORT_UE27_4406$primaryValue.y=as.numeric(IMPORT_UE27_4406$primaryValue.y)
-str(IMPORT_UE27_4406)
+#PRODUIT 4407#
+#EXPORTATION UE27 DE 4407#
+EXPORT_UE27_4407 <- mirror_flow_4407[grepl(pattern, mirror_flow_4407$reporterDesc)&
+                                       !(grepl(pattern, mirror_flow_4407$partnerDesc)),]
+EXPORT_UE27_4407$primaryValue.x=as.numeric(EXPORT_UE27_4407$primaryValue.x)
+EXPORT_UE27_4407$primaryValue.y=as.numeric(EXPORT_UE27_4407$primaryValue.y)
+str(EXPORT_UE27_4407)
+#IMPORTATION UE27 DE 4407#
+IMPORT_UE27_4407<- mirror_flow_4407[!(grepl(pattern, mirror_flow_4407$reporterDesc))&
+                                       grepl(pattern, mirror_flow_4407$partnerDesc),]
+IMPORT_UE27_4407$primaryValue.x=as.numeric(IMPORT_UE27_4407$primaryValue.x)
+IMPORT_UE27_4407$primaryValue.y=as.numeric(IMPORT_UE27_4407$primaryValue.y)
+str(IMPORT_UE27_4407)
+
 
 ######ANALYSE DES GROUPES DE DONNEES#####
+
+###Installation du package dlyr pour proceder aux analyses de donnees standard
+###(sumamrise, arrange et autres manipulations qui permettent de montrer les 
+###principaux importateurs et exportateurs)###
+
 install.packages('dplyr')
 library('dplyr')
 
 ##PRODUIT 440131##
+
 #EXPORT#
 yr_pays_EXPORT_UE27_440131 <- EXPORT_UE27_440131 %>%
   group_by(period, partnerDesc) %>%
@@ -458,7 +467,12 @@ TOTAL_EXPORT_UE27_440131<- yr_pays_EXPORT_UE27_440131%>%
 
 top_EXPORT_UE27_440131 <- yr_pays_EXPORT_UE27_440131 %>%
   group_by(period) %>%
-  slice_max(totalValue_y, n = 10) %>%
+  slice_max(totalValue_y, n = 5) %>%
+  ungroup()
+
+top_EXPORT_UE27_440131_2 <- yr_pays_EXPORT_UE27_440131 %>%
+  group_by(period) %>%
+  slice_max(totalValue_x, n = 5) %>%
   ungroup()
 
 #IMPORT#
@@ -476,7 +490,12 @@ TOTAL_IMPORT_UE27_440131<- yr_pays_IMPORT_UE27_440131%>%
 
 top_IMPORT_UE27_440131 <- yr_pays_IMPORT_UE27_440131 %>%
   group_by(period) %>%
-  slice_max(totalValue_y, n = 10) %>%
+  slice_max(totalValue_y, n = 5) %>%
+  ungroup()
+
+top_IMPORT_UE27_440131_2 <- yr_pays_IMPORT_UE27_440131 %>%
+  group_by(period) %>%
+  slice_max(totalValue_x, n = 5) %>%
   ungroup()
 
 ##PRODUIT 4418##
@@ -497,12 +516,12 @@ TOTAL_EXPORT_UE27_4418<- yr_pays_EXPORT_UE27_4418%>%
 
 top_EXPORT_UE27_4418 <- yr_pays_EXPORT_UE27_4418 %>%
   group_by(period) %>%
-  slice_max(totalValue_y, n = 10) %>%
+  slice_max(totalValue_y, n = 5) %>%
   ungroup()
 
 top_EXPORT_UE27_4418_2 <- yr_pays_EXPORT_UE27_4418 %>%
   group_by(period) %>%
-  slice_max(totalValue_x, n = 10) %>%
+  slice_max(totalValue_x, n = 5) %>%
   ungroup()
 
 #IMPORT
