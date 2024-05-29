@@ -140,3 +140,8 @@ début de rédaction introduction
 correction matériels et méthode
 mise à jour du script R
 réflexion sur une possible MAJ des codes produits à prendre en compte dans l'étude
+# Journée du 29 mai
+# Matinée
+correction du matériel et méthodes
+# Après-midi
+script R (pas encore push sur GitHub) et réflexion introduction
