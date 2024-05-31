@@ -69,6 +69,7 @@ citation("comtradeapicall")
 citation("reticulate")
 citation("rstudioapi")
 citation("ggplot2")
+citation("dplyr")
 #####IMPORTATION DU JEU DE DONNEES 4418#####
 
 # Indicate anaconda environment
@@ -525,3 +526,27 @@ top_EXPORT_UE27_4418_2 <- yr_pays_EXPORT_UE27_4418 %>%
   ungroup()
 
 #IMPORT
+yr_pays_IMPORT_UE27_4418 <- IMPORT_UE27_4418 %>%
+  group_by(period, reporterDesc) %>%
+  summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
+            totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(period,desc(totalValue_y))
+
+TOTAL_IMPORT_UE27_4418<- yr_pays_IMPORT_UE27_4418%>%
+  group_by(period)%>%
+  summarise(IMPORT = sum(totalValue_y),
+            EXPORT = sum(totalValue_x))%>%
+  arrange(period)
+
+
+
+top_IMPORT_UE27_4418 <- yr_pays_IMPORT_UE27_4418 %>%
+  group_by(period) %>%
+  slice_max(totalValue_y, n = 5) %>%
+  ungroup()
+
+top_IMPORT_UE27_4418_2 <- yr_pays_IMPORT_UE27_4418 %>%
+  group_by(period) %>%
+  slice_max(totalValue_x, n = 5) %>%
+  ungroup()
+
