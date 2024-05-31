@@ -150,3 +150,10 @@ script R (pas encore push sur GitHub) et réflexion introduction
 Finalisation de la partie matériels et méthodes (peut-être encore trop de texte à voir s'il faut ajuster)
 ## Après-midi
 Rédaction du premier jet de l'introduction (non terminé)
+# Journée du 31 mai
+## Matinée
+réunion état d'avancement des projets 
+mise à jour du matériel et méthodes
+## Après-midi
+mise à jour mineure du script R
+rédaction du premier jet de l'introduction du rapport de stage
