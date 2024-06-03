@@ -157,3 +157,8 @@ mise à jour du matériel et méthodes
 ## Après-midi
 mise à jour mineure du script R
 rédaction du premier jet de l'introduction du rapport de stage
+# Journée du 03 juin
+## Matinée
+Mise à jour du code R et modification de l'introduction selon les conseils d'Alexandra
+## Après-midi
+Mise à jour du code R et importation des données FAOSTAT
