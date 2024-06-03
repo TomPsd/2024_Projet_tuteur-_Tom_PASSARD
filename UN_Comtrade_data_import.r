@@ -460,6 +460,18 @@ yr_pays_EXPORT_UE27_440131 <- EXPORT_UE27_440131 %>%
             totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
   arrange(period,desc(totalValue_y))
 
+result1 <- yr_pays_EXPORT_UE27_440131 %>%
+  group_by(period) %>%
+  mutate(proportion = totalValue_y / sum(totalValue_y)) %>%
+  ungroup()
+yr_pays_EXPORT_UE27_440131$proportion_y <- result1$proportion
+
+result2 <- yr_pays_EXPORT_UE27_440131 %>%
+  group_by(period) %>%
+  mutate(proportion_x = totalValue_x / sum(totalValue_x)) %>%
+  ungroup()
+yr_pays_EXPORT_UE27_440131$proportion_x <- result2$proportion_x
+
 TOTAL_EXPORT_UE27_440131<- yr_pays_EXPORT_UE27_440131%>%
   group_by(period)%>%
   summarise(IMPORT = sum(totalValue_y),
@@ -468,20 +480,33 @@ TOTAL_EXPORT_UE27_440131<- yr_pays_EXPORT_UE27_440131%>%
 
 top_EXPORT_UE27_440131 <- yr_pays_EXPORT_UE27_440131 %>%
   group_by(period) %>%
-  slice_max(totalValue_y, n = 5) %>%
+  slice_max(proportion_y, n = 5) %>%
   ungroup()
 
 top_EXPORT_UE27_440131_2 <- yr_pays_EXPORT_UE27_440131 %>%
   group_by(period) %>%
-  slice_max(totalValue_x, n = 5) %>%
+  slice_max(proportion_x, n = 5) %>%
   ungroup()
 
 #IMPORT#
+
 yr_pays_IMPORT_UE27_440131 <- IMPORT_UE27_440131 %>%
   group_by(period, reporterDesc) %>%
   summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
             totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
   arrange(period,desc(totalValue_y))
+
+result3 <- yr_pays_IMPORT_UE27_440131 %>%
+  group_by(period) %>%
+  mutate(proportion_y = totalValue_y / sum(totalValue_y)) %>%
+  ungroup()
+yr_pays_IMPORT_UE27_440131$proportion_y <- result3$proportion_y
+
+result4 <- yr_pays_IMPORT_UE27_440131 %>%
+  group_by(period) %>%
+  mutate(proportion_x = totalValue_x / sum(totalValue_x)) %>%
+  ungroup()
+yr_pays_IMPORT_UE27_440131$proportion_x <- result4$proportion_x
 
 TOTAL_IMPORT_UE27_440131<- yr_pays_IMPORT_UE27_440131%>%
   group_by(period)%>%
@@ -491,13 +516,18 @@ TOTAL_IMPORT_UE27_440131<- yr_pays_IMPORT_UE27_440131%>%
 
 top_IMPORT_UE27_440131 <- yr_pays_IMPORT_UE27_440131 %>%
   group_by(period) %>%
-  slice_max(totalValue_y, n = 5) %>%
+  slice_max(proportion_y, n = 5) %>%
   ungroup()
 
 top_IMPORT_UE27_440131_2 <- yr_pays_IMPORT_UE27_440131 %>%
   group_by(period) %>%
-  slice_max(totalValue_x, n = 5) %>%
+  slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+#VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
+solde_IMPORT <- TOTAL_EXPORT_UE27_440131$IMPORT - TOTAL_IMPORT_UE27_440131$IMPORT
+solde_EXPORT <- TOTAL_EXPORT_UE27_440131$EXPORT - TOTAL_IMPORT_UE27_440131$EXPORT
+balance_commerciale_440131 <- data.frame(TOTAL_EXPORT_UE27_440131$period,solde_IMPORT,solde_EXPORT)
 
 ##PRODUIT 4418##
 #EXPORT#
@@ -507,30 +537,52 @@ yr_pays_EXPORT_UE27_4418 <- EXPORT_UE27_4418 %>%
             totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
   arrange(period,desc(totalValue_y))
 
+result5 <- yr_pays_EXPORT_UE27_4418 %>%
+  group_by(period) %>%
+  mutate(proportion_y = totalValue_y / sum(totalValue_y)) %>%
+  ungroup()
+yr_pays_EXPORT_UE27_4418$proportion_y <- result5$proportion_y
+
+result6 <- yr_pays_EXPORT_UE27_4418 %>%
+  group_by(period) %>%
+  mutate(proportion_x = totalValue_x / sum(totalValue_x)) %>%
+  ungroup()
+yr_pays_EXPORT_UE27_4418$proportion_x <- result6$proportion_x
+
 TOTAL_EXPORT_UE27_4418<- yr_pays_EXPORT_UE27_4418%>%
   group_by(period)%>%
   summarise(IMPORT = sum(totalValue_y),
             EXPORT = sum(totalValue_x))%>%
   arrange(period)
 
-
-
 top_EXPORT_UE27_4418 <- yr_pays_EXPORT_UE27_4418 %>%
   group_by(period) %>%
-  slice_max(totalValue_y, n = 5) %>%
+  slice_max(proportion_y, n = 5) %>%
   ungroup()
 
 top_EXPORT_UE27_4418_2 <- yr_pays_EXPORT_UE27_4418 %>%
   group_by(period) %>%
-  slice_max(totalValue_x, n = 5) %>%
+  slice_max(proportion_x, n = 5) %>%
   ungroup()
 
-#IMPORT
+#IMPORT#
 yr_pays_IMPORT_UE27_4418 <- IMPORT_UE27_4418 %>%
   group_by(period, reporterDesc) %>%
   summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
             totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
   arrange(period,desc(totalValue_y))
+
+result7 <- yr_pays_IMPORT_UE27_4418 %>%
+  group_by(period) %>%
+  mutate(proportion_y = totalValue_y / sum(totalValue_y)) %>%
+  ungroup()
+yr_pays_IMPORT_UE27_4418$proportion_y <- result7$proportion_y
+
+result8 <- yr_pays_IMPORT_UE27_4418 %>%
+  group_by(period) %>%
+  mutate(proportion_x = totalValue_x / sum(totalValue_x)) %>%
+  ungroup()
+yr_pays_IMPORT_UE27_4418$proportion_x <- result8$proportion_x
 
 TOTAL_IMPORT_UE27_4418<- yr_pays_IMPORT_UE27_4418%>%
   group_by(period)%>%
@@ -538,15 +590,255 @@ TOTAL_IMPORT_UE27_4418<- yr_pays_IMPORT_UE27_4418%>%
             EXPORT = sum(totalValue_x))%>%
   arrange(period)
 
-
-
 top_IMPORT_UE27_4418 <- yr_pays_IMPORT_UE27_4418 %>%
   group_by(period) %>%
-  slice_max(totalValue_y, n = 5) %>%
+  slice_max(proportion_y, n = 5) %>%
   ungroup()
 
 top_IMPORT_UE27_4418_2 <- yr_pays_IMPORT_UE27_4418 %>%
   group_by(period) %>%
-  slice_max(totalValue_x, n = 5) %>%
+  slice_max(proportion_x, n = 5) %>%
   ungroup()
 
+#VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
+solde_IMPORT_4418 <- TOTAL_EXPORT_UE27_4418$IMPORT - TOTAL_IMPORT_UE27_4418$IMPORT
+solde_EXPORT_4418 <- TOTAL_EXPORT_UE27_4418$EXPORT - TOTAL_IMPORT_UE27_4418$EXPORT
+balance_commerciale_4418 <- data.frame(TOTAL_EXPORT_UE27_4418$period,solde_IMPORT_4418,solde_EXPORT_4418)
+
+##PRODUIT 4412##
+#EXPORT#
+yr_pays_EXPORT_UE27_4412 <- EXPORT_UE27_4412 %>%
+  group_by(period, partnerDesc) %>%
+  summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
+            totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(period,desc(totalValue_y))
+
+result9 <- yr_pays_EXPORT_UE27_4412 %>%
+  group_by(period) %>%
+  mutate(proportion_y = totalValue_y / sum(totalValue_y)) %>%
+  ungroup()
+yr_pays_EXPORT_UE27_4412$proportion_y <- result9$proportion_y
+
+result10 <- yr_pays_EXPORT_UE27_4412 %>%
+  group_by(period) %>%
+  mutate(proportion_x = totalValue_x / sum(totalValue_x)) %>%
+  ungroup()
+yr_pays_EXPORT_UE27_4412$proportion_x <- result10$proportion_x
+
+TOTAL_EXPORT_UE27_4412<- yr_pays_EXPORT_UE27_4412%>%
+  group_by(period)%>%
+  summarise(IMPORT = sum(totalValue_y),
+            EXPORT = sum(totalValue_x))%>%
+  arrange(period)
+
+top_EXPORT_UE27_4412 <- yr_pays_EXPORT_UE27_4412 %>%
+  group_by(period) %>%
+  slice_max(proportion_y, n = 5) %>%
+  ungroup()
+
+top_EXPORT_UE27_4412_2 <- yr_pays_EXPORT_UE27_4412 %>%
+  group_by(period) %>%
+  slice_max(proportion_x, n = 5) %>%
+  ungroup()
+
+#IMPORT#
+yr_pays_IMPORT_UE27_4412 <- IMPORT_UE27_4412 %>%
+  group_by(period, reporterDesc) %>%
+  summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
+            totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(period,desc(totalValue_y))
+
+result11 <- yr_pays_IMPORT_UE27_4412 %>%
+  group_by(period) %>%
+  mutate(proportion_y = totalValue_y / sum(totalValue_y)) %>%
+  ungroup()
+yr_pays_IMPORT_UE27_4412$proportion_y <- result11$proportion_y
+
+result12 <- yr_pays_IMPORT_UE27_4412 %>%
+  group_by(period) %>%
+  mutate(proportion_x = totalValue_x / sum(totalValue_x)) %>%
+  ungroup()
+yr_pays_IMPORT_UE27_4412$proportion_x <- result12$proportion_x
+
+TOTAL_IMPORT_UE27_4412<- yr_pays_IMPORT_UE27_4412%>%
+  group_by(period)%>%
+  summarise(IMPORT = sum(totalValue_y),
+            EXPORT = sum(totalValue_x))%>%
+  arrange(period)
+
+top_IMPORT_UE27_4412 <- yr_pays_IMPORT_UE27_4412 %>%
+  group_by(period) %>%
+  slice_max(proportion_y, n = 5) %>%
+  ungroup()
+
+top_IMPORT_UE27_4412_2 <- yr_pays_IMPORT_UE27_4412 %>%
+  group_by(period) %>%
+  slice_max(proportion_x, n = 5) %>%
+  ungroup()
+
+#VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
+solde_IMPORT_4412 <- TOTAL_EXPORT_UE27_4412$IMPORT - TOTAL_IMPORT_UE27_4412$IMPORT
+solde_EXPORT_4412 <- TOTAL_EXPORT_UE27_4412$EXPORT - TOTAL_IMPORT_UE27_4412$EXPORT
+balance_commerciale_4412 <- data.frame(TOTAL_EXPORT_UE27_4412$period,solde_IMPORT_4412,solde_EXPORT_4412)
+
+##PRODUIT 4410##
+#EXPORT#
+yr_pays_EXPORT_UE27_4410 <- EXPORT_UE27_4410 %>%
+  group_by(period, partnerDesc) %>%
+  summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
+            totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(period,desc(totalValue_y))
+
+result13 <- yr_pays_EXPORT_UE27_4410 %>%
+  group_by(period) %>%
+  mutate(proportion_y = totalValue_y / sum(totalValue_y)) %>%
+  ungroup()
+yr_pays_EXPORT_UE27_4410$proportion_y <- result13$proportion_y
+
+result14 <- yr_pays_EXPORT_UE27_4410 %>%
+  group_by(period) %>%
+  mutate(proportion_x = totalValue_x / sum(totalValue_x)) %>%
+  ungroup()
+yr_pays_EXPORT_UE27_4410$proportion_x <- result14$proportion_x
+
+TOTAL_EXPORT_UE27_4410<- yr_pays_EXPORT_UE27_4410%>%
+  group_by(period)%>%
+  summarise(IMPORT = sum(totalValue_y),
+            EXPORT = sum(totalValue_x))%>%
+  arrange(period)
+
+top_EXPORT_UE27_4410 <- yr_pays_EXPORT_UE27_4410 %>%
+  group_by(period) %>%
+  slice_max(proportion_y, n = 5) %>%
+  ungroup()
+
+top_EXPORT_UE27_4410_2 <- yr_pays_EXPORT_UE27_4410 %>%
+  group_by(period) %>%
+  slice_max(proportion_x, n = 5) %>%
+  ungroup()
+
+#IMPORT#
+yr_pays_IMPORT_UE27_4410 <- IMPORT_UE27_4410 %>%
+  group_by(period, reporterDesc) %>%
+  summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
+            totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(period,desc(totalValue_y))
+
+result15 <- yr_pays_IMPORT_UE27_4410 %>%
+  group_by(period) %>%
+  mutate(proportion_y = totalValue_y / sum(totalValue_y)) %>%
+  ungroup()
+yr_pays_IMPORT_UE27_4410$proportion_y <- result15$proportion_y
+
+result16 <- yr_pays_IMPORT_UE27_4410 %>%
+  group_by(period) %>%
+  mutate(proportion_x = totalValue_x / sum(totalValue_x)) %>%
+  ungroup()
+yr_pays_IMPORT_UE27_4410$proportion_x <- result16$proportion_x
+
+TOTAL_IMPORT_UE27_4410<- yr_pays_IMPORT_UE27_4410%>%
+  group_by(period)%>%
+  summarise(IMPORT = sum(totalValue_y),
+            EXPORT = sum(totalValue_x))%>%
+  arrange(period)
+
+top_IMPORT_UE27_4410 <- yr_pays_IMPORT_UE27_4410 %>%
+  group_by(period) %>%
+  slice_max(proportion_y, n = 5) %>%
+  ungroup()
+
+top_IMPORT_UE27_4410_2 <- yr_pays_IMPORT_UE27_4410 %>%
+  group_by(period) %>%
+  slice_max(proportion_x, n = 5) %>%
+  ungroup()
+
+#VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
+solde_IMPORT_4410 <- TOTAL_EXPORT_UE27_4410$IMPORT - TOTAL_IMPORT_UE27_4410$IMPORT
+solde_EXPORT_4410 <- TOTAL_EXPORT_UE27_4410$EXPORT - TOTAL_IMPORT_UE27_4410$EXPORT
+balance_commerciale_4410 <- data.frame(TOTAL_EXPORT_UE27_4410$period,solde_IMPORT_4410,solde_EXPORT_4410)
+
+##PRODUIT 4407##
+#EXPORT#
+yr_pays_EXPORT_UE27_4407 <- EXPORT_UE27_4407 %>%
+  group_by(period, partnerDesc) %>%
+  summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
+            totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(period,desc(totalValue_y))
+
+result17 <- yr_pays_EXPORT_UE27_4407 %>%
+  group_by(period) %>%
+  mutate(proportion_y = totalValue_y / sum(totalValue_y)) %>%
+  ungroup()
+yr_pays_EXPORT_UE27_4407$proportion_y <- result17$proportion_y
+
+result18 <- yr_pays_EXPORT_UE27_4407 %>%
+  group_by(period) %>%
+  mutate(proportion_x = totalValue_x / sum(totalValue_x)) %>%
+  ungroup()
+yr_pays_EXPORT_UE27_4407$proportion_x <- result18$proportion_x
+
+TOTAL_EXPORT_UE27_4407<- yr_pays_EXPORT_UE27_4407%>%
+  group_by(period)%>%
+  summarise(IMPORT = sum(totalValue_y),
+            EXPORT = sum(totalValue_x))%>%
+  arrange(period)
+
+top_EXPORT_UE27_4407 <- yr_pays_EXPORT_UE27_4407 %>%
+  group_by(period) %>%
+  slice_max(proportion_y, n = 5) %>%
+  ungroup()
+
+top_EXPORT_UE27_4407_2 <- yr_pays_EXPORT_UE27_4407 %>%
+  group_by(period) %>%
+  slice_max(proportion_x, n = 5) %>%
+  ungroup()
+
+#IMPORT#
+yr_pays_IMPORT_UE27_4407 <- IMPORT_UE27_4407 %>%
+  group_by(period, reporterDesc) %>%
+  summarise(totalValue_x = sum(primaryValue.x, na.rm = TRUE),
+            totalValue_y = sum(primaryValue.y, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(period,desc(totalValue_y))
+
+result19 <- yr_pays_IMPORT_UE27_4407 %>%
+  group_by(period) %>%
+  mutate(proportion_y = totalValue_y / sum(totalValue_y)) %>%
+  ungroup()
+yr_pays_IMPORT_UE27_4407$proportion_y <- result19$proportion_y
+
+result20 <- yr_pays_IMPORT_UE27_4407 %>%
+  group_by(period) %>%
+  mutate(proportion_x = totalValue_x / sum(totalValue_x)) %>%
+  ungroup()
+yr_pays_IMPORT_UE27_4407$proportion_x <- result20$proportion_x
+
+TOTAL_IMPORT_UE27_4407<- yr_pays_IMPORT_UE27_4407%>%
+  group_by(period)%>%
+  summarise(IMPORT = sum(totalValue_y),
+            EXPORT = sum(totalValue_x))%>%
+  arrange(period)
+
+top_IMPORT_UE27_4407 <- yr_pays_IMPORT_UE27_4407 %>%
+  group_by(period) %>%
+  slice_max(proportion_y, n = 5) %>%
+  ungroup()
+
+top_IMPORT_UE27_4407_2 <- yr_pays_IMPORT_UE27_4407 %>%
+  group_by(period) %>%
+  slice_max(proportion_x, n = 5) %>%
+  ungroup()
+
+#VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
+solde_IMPORT_4407 <- TOTAL_EXPORT_UE27_4407$IMPORT - TOTAL_IMPORT_UE27_4407$IMPORT
+solde_EXPORT_4407 <- TOTAL_EXPORT_UE27_4407$EXPORT - TOTAL_IMPORT_UE27_4407$EXPORT
+balance_commerciale_4407 <- data.frame(TOTAL_EXPORT_UE27_4407$period,solde_IMPORT_4407,solde_EXPORT_4407)
+
+
+######PARTIE DONNEES FAOSTAT######
+uno<- read.csv2("./raw_data/TAB_FAOSTAT.csv",sep = ",")
+print(paste0("Years covered: ",
+             paste(unique(uno$Year.Code), sep = "", collapse = ", ")))
+print(paste0("Commodities considered: ",
+             paste(unique(uno$Element), sep = "", collapse = ", ")))
+print(paste0("items: ",
+             paste(unique(uno$Item), sep = "", collapse = ", ")))
