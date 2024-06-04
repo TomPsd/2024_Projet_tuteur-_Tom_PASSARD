@@ -162,3 +162,10 @@ rédaction du premier jet de l'introduction du rapport de stage
 Mise à jour du code R et modification de l'introduction selon les conseils d'Alexandra
 ## Après-midi
 Mise à jour du code R et importation des données FAOSTAT
+# Journée du 04 juin
+## Matinée
+mise à jour du script R
+correction de l'introduction
+## Après-midi
+mise à jour du script R
+création cdes graphiques R
