@@ -833,6 +833,14 @@ solde_IMPORT_4407 <- TOTAL_EXPORT_UE27_4407$IMPORT - TOTAL_IMPORT_UE27_4407$IMPO
 solde_EXPORT_4407 <- TOTAL_EXPORT_UE27_4407$EXPORT - TOTAL_IMPORT_UE27_4407$EXPORT
 balance_commerciale_4407 <- data.frame(TOTAL_EXPORT_UE27_4407$period,solde_IMPORT_4407,solde_EXPORT_4407)
 
+balance_commerciale_UE27<- EXPORT_UE27_440131%>%
+  group_by(period)%>%
+  summarise(declaration_export = sum(primaryValue.x, na.rm = TRUE),
+            declaration_import= sum(primaryValue.y, na.rm = TRUE), .groups = 'drop')
+#####AFFICHAGE GRAPHIQUE DES DONNEES UN COMTRADE#####
+install.packages("ggplot2")
+library("ggplot2")
+##EVOLUTION DE LA VALEUR DU COMMERCE DE PELLETS AU COURS DU TEMPS##
 
 ######PARTIE DONNEES FAOSTAT######
 uno<- read.csv2("./raw_data/TAB_FAOSTAT.csv",sep = ",")
@@ -842,3 +850,108 @@ print(paste0("Commodities considered: ",
              paste(unique(uno$Element), sep = "", collapse = ", ")))
 print(paste0("items: ",
              paste(unique(uno$Item), sep = "", collapse = ", ")))
+##WOOD PELLETS##
+wood_pellets<- uno[uno$Item=="Wood pellets",]
+autoconso_pellets = wood_pellets%>%
+  group_by(Year.Code,Element)%>%
+  summarise(somme = sum(Value, na.rm = TRUE),.groups = 'drop') %>%
+  arrange(Year.Code)
+autoconso_pellets = autoconso_pellets%>%
+  group_by(Year.Code)%>%
+  mutate(proportion = somme/ sum(somme)) %>%
+  ungroup()
+
+export_pellets = autoconso_pellets[autoconso_pellets$Element=="Export Quantity",]
+import_pellets = autoconso_pellets[autoconso_pellets$Element=="Import Quantity",]
+production_pellets = autoconso_pellets[autoconso_pellets$Element== "Production",]
+
+calcul_autoconso_pellets = production_pellets$somme+(import_pellets$somme - export_pellets$somme)
+autoconsommation_pellets = data.frame(c(2012:2020),import_pellets$somme,export_pellets$somme,production_pellets$somme,calcul_autoconso_pellets)
+autoconsommation_pellets$proportion_production = autoconsommation_pellets$production_pellets.somme/autoconsommation_pellets$calcul_autoconso_pellets
+autoconsommation_pellets$proportion_importation = autoconsommation_pellets$import_pellets.somme/autoconsommation_pellets$calcul_autoconso_pellets
+autoconsommation_pellets$excedents = (autoconsommation_pellets$proportion_production+autoconsommation_pellets$proportion_importation)-1
+
+##SAWNWOOD##
+Sawnwood = uno[uno$Item=="Sawnwood",]
+autoconso_sawnwood = Sawnwood%>%
+  group_by(Year.Code,Element)%>%
+  summarise(somme = sum(Value, na.rm = TRUE),.groups = 'drop') %>%
+  arrange(Year.Code)
+autoconso_sawnwood = autoconso_sawnwood%>%
+  group_by(Year.Code)%>%
+  mutate(proportion = somme/ sum(somme)) %>%
+  ungroup()
+
+export_sawnwood = autoconso_sawnwood[autoconso_sawnwood$Element=="Export Quantity",]
+import_sawnwood = autoconso_sawnwood[autoconso_sawnwood$Element=="Import Quantity",]
+production_sawnwood = autoconso_sawnwood[autoconso_sawnwood$Element== "Production",]
+
+calcul_autoconso_sawnwood = production_sawnwood$somme+(import_sawnwood$somme - export_sawnwood$somme)
+autoconsommation_sawnwood = data.frame(c(2000:2020),import_sawnwood$somme,export_sawnwood$somme,production_sawnwood$somme,calcul_autoconso_sawnwood)
+autoconsommation_sawnwood$proportion_production = autoconsommation_sawnwood$production_sawnwood.somme/autoconsommation_sawnwood$calcul_autoconso_sawnwood
+autoconsommation_sawnwood$proportion_importation = autoconsommation_sawnwood$import_sawnwood.somme/autoconsommation_sawnwood$calcul_autoconso_sawnwood
+autoconsommation_sawnwood$excedents = (autoconsommation_sawnwood$proportion_production+autoconsommation_sawnwood$proportion_importation)-1
+
+##WOOD-BASED PANELS
+WBP = uno[uno$Item=="Wood-based panels",]
+autoconso_WBP = WBP %>%
+  group_by(Year.Code,Element)%>%
+  summarise(somme = sum(Value, na.rm = TRUE),.groups = 'drop') %>%
+  arrange(Year.Code)
+autoconso_WBP = autoconso_WBP%>%
+  group_by(Year.Code)%>%
+  mutate(proportion = somme/ sum(somme)) %>%
+  ungroup()
+
+export_WBP = autoconso_WBP[autoconso_WBP$Element=="Export Quantity",]
+import_WBP = autoconso_WBP[autoconso_WBP$Element=="Import Quantity",]
+production_WBP = autoconso_WBP[autoconso_WBP$Element== "Production",]
+
+calcul_autoconso_WBP = production_WBP$somme+(import_WBP$somme - export_WBP$somme)
+autoconsommation_WBP = data.frame(c(2000:2020),import_WBP$somme,export_WBP$somme,production_WBP$somme,calcul_autoconso_WBP)
+autoconsommation_WBP$proportion_production = autoconsommation_WBP$production_WBP.somme/autoconsommation_WBP$calcul_autoconso_WBP
+autoconsommation_WBP$proportion_importation = autoconsommation_WBP$import_WBP.somme/autoconsommation_WBP$calcul_autoconso_WBP
+autoconsommation_WBP$excedents = (autoconsommation_WBP$proportion_production+autoconsommation_WBP$proportion_importation)-1
+
+##PARTICLE BOARD##
+PB=uno[uno$Item=="Particle board",]
+autoconso_PB = PB %>%
+  group_by(Year.Code,Element)%>%
+  summarise(somme = sum(Value, na.rm = TRUE),.groups = 'drop') %>%
+  arrange(Year.Code)
+autoconso_PB = autoconso_PB%>%
+  group_by(Year.Code)%>%
+  mutate(proportion = somme/ sum(somme)) %>%
+  ungroup()
+
+export_PB = autoconso_PB[autoconso_PB$Element=="Export Quantity",]
+import_PB = autoconso_PB[autoconso_PB$Element=="Import Quantity",]
+production_PB = autoconso_PB[autoconso_PB$Element== "Production",]
+
+calcul_autoconso_PB = production_PB$somme+(import_PB$somme - export_PB$somme)
+autoconsommation_PB = data.frame(c(2000:2020),import_PB$somme,export_PB$somme,production_PB$somme,calcul_autoconso_PB)
+autoconsommation_PB$proportion_production = autoconsommation_PB$production_PB.somme/autoconsommation_PB$calcul_autoconso_PB
+autoconsommation_PB$proportion_importation = autoconsommation_PB$import_PB.somme/autoconsommation_PB$calcul_autoconso_PB
+autoconsommation_PB$excedents = (autoconsommation_PB$proportion_production+autoconsommation_PB$proportion_importation)-1
+
+##OSB##
+OSB=uno[uno$Item=="OSB",]
+autoconso_OSB = OSB %>%
+  group_by(Year.Code,Element)%>%
+  summarise(somme = sum(Value, na.rm = TRUE),.groups = 'drop') %>%
+  arrange(Year.Code)
+autoconso_OSB = autoconso_OSB%>%
+  group_by(Year.Code)%>%
+  mutate(proportion = somme/ sum(somme)) %>%
+  ungroup()
+
+export_OSB = autoconso_OSB[autoconso_OSB$Element=="Export Quantity",]
+import_OSB = autoconso_OSB[autoconso_OSB$Element=="Import Quantity",]
+production_OSB = autoconso_OSB[autoconso_OSB$Element== "Production",]
+
+calcul_autoconso_OSB = production_OSB$somme+(import_OSB$somme - export_OSB$somme)
+autoconsommation_OSB = data.frame(c(2000:2020),import_OSB$somme,export_OSB$somme,production_OSB$somme,calcul_autoconso_OSB)
+autoconsommation_OSB$proportion_production = autoconsommation_OSB$production_OSB.somme/autoconsommation_OSB$calcul_autoconso_OSB
+autoconsommation_OSB$proportion_importation = autoconsommation_OSB$import_OSB.somme/autoconsommation_OSB$calcul_autoconso_OSB
+autoconsommation_OSB$excedents = (autoconsommation_OSB$proportion_production+autoconsommation_OSB$proportion_importation)-1
+
