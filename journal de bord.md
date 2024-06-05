@@ -169,3 +169,8 @@ correction de l'introduction
 ## Après-midi
 mise à jour du script R
 création cdes graphiques R
+# Journée du 5 juin
+## Matinée
+création des graphiques sur R, rédaction résultats
+## Après-midi
+création des graphiques sur R, rédaction résultats
