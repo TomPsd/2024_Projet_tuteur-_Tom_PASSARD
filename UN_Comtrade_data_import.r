@@ -474,8 +474,8 @@ yr_pays_EXPORT_UE27_440131$proportion_x <- result2$proportion_x
 
 TOTAL_EXPORT_UE27_440131<- yr_pays_EXPORT_UE27_440131%>%
   group_by(period)%>%
-  summarise(IMPORT = sum(totalValue_y),
-            EXPORT = sum(totalValue_x))%>%
+  summarise(IMPORT_HORS_UE = sum(totalValue_y),
+            EXPORT_UE = sum(totalValue_x))%>%
   arrange(period)
 
 top_EXPORT_UE27_440131 <- yr_pays_EXPORT_UE27_440131 %>%
@@ -510,8 +510,8 @@ yr_pays_IMPORT_UE27_440131$proportion_x <- result4$proportion_x
 
 TOTAL_IMPORT_UE27_440131<- yr_pays_IMPORT_UE27_440131%>%
   group_by(period)%>%
-  summarise(IMPORT = sum(totalValue_y),
-            EXPORT = sum(totalValue_x))%>%
+  summarise(IMPORT_UE = sum(totalValue_y),
+            EXPORT_HORS_UE = sum(totalValue_x))%>%
   arrange(period)
 
 top_IMPORT_UE27_440131 <- yr_pays_IMPORT_UE27_440131 %>%
@@ -525,8 +525,8 @@ top_IMPORT_UE27_440131_2 <- yr_pays_IMPORT_UE27_440131 %>%
   ungroup()
 
 #VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
-solde_IMPORT <- TOTAL_EXPORT_UE27_440131$IMPORT - TOTAL_IMPORT_UE27_440131$IMPORT
-solde_EXPORT <- TOTAL_EXPORT_UE27_440131$EXPORT - TOTAL_IMPORT_UE27_440131$EXPORT
+solde_IMPORT <- TOTAL_EXPORT_UE27_440131$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_440131$IMPORT_UE
+solde_EXPORT <- TOTAL_EXPORT_UE27_440131$EXPORT_UE - TOTAL_IMPORT_UE27_440131$EXPORT_HORS_UE
 balance_commerciale_440131 <- data.frame(TOTAL_EXPORT_UE27_440131$period,solde_IMPORT,solde_EXPORT)
 
 ##PRODUIT 4418##
@@ -551,8 +551,8 @@ yr_pays_EXPORT_UE27_4418$proportion_x <- result6$proportion_x
 
 TOTAL_EXPORT_UE27_4418<- yr_pays_EXPORT_UE27_4418%>%
   group_by(period)%>%
-  summarise(IMPORT = sum(totalValue_y),
-            EXPORT = sum(totalValue_x))%>%
+  summarise(IMPORT_HORS_UE = sum(totalValue_y),
+            EXPORT_UE = sum(totalValue_x))%>%
   arrange(period)
 
 top_EXPORT_UE27_4418 <- yr_pays_EXPORT_UE27_4418 %>%
@@ -586,8 +586,8 @@ yr_pays_IMPORT_UE27_4418$proportion_x <- result8$proportion_x
 
 TOTAL_IMPORT_UE27_4418<- yr_pays_IMPORT_UE27_4418%>%
   group_by(period)%>%
-  summarise(IMPORT = sum(totalValue_y),
-            EXPORT = sum(totalValue_x))%>%
+  summarise(IMPORT_UE = sum(totalValue_y),
+            EXPORT_HORS_UE = sum(totalValue_x))%>%
   arrange(period)
 
 top_IMPORT_UE27_4418 <- yr_pays_IMPORT_UE27_4418 %>%
@@ -601,9 +601,9 @@ top_IMPORT_UE27_4418_2 <- yr_pays_IMPORT_UE27_4418 %>%
   ungroup()
 
 #VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
-solde_IMPORT_4418 <- TOTAL_EXPORT_UE27_4418$IMPORT - TOTAL_IMPORT_UE27_4418$IMPORT
-solde_EXPORT_4418 <- TOTAL_EXPORT_UE27_4418$EXPORT - TOTAL_IMPORT_UE27_4418$EXPORT
-balance_commerciale_4418 <- data.frame(TOTAL_EXPORT_UE27_4418$period,solde_IMPORT_4418,solde_EXPORT_4418)
+solde_decla_IMPORT_4418 <- TOTAL_EXPORT_UE27_4418$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4418$IMPORT_UE
+solde_decla_EXPORT_4418 <- TOTAL_EXPORT_UE27_4418$EXPORT_UE - TOTAL_IMPORT_UE27_4418$EXPORT_HORS_UE
+balance_commerciale_4418 <- data.frame(TOTAL_EXPORT_UE27_4418$period,solde_decla_IMPORT_4418,solde_decla_EXPORT_4418)
 
 ##PRODUIT 4412##
 #EXPORT#
@@ -627,8 +627,8 @@ yr_pays_EXPORT_UE27_4412$proportion_x <- result10$proportion_x
 
 TOTAL_EXPORT_UE27_4412<- yr_pays_EXPORT_UE27_4412%>%
   group_by(period)%>%
-  summarise(IMPORT = sum(totalValue_y),
-            EXPORT = sum(totalValue_x))%>%
+  summarise(IMPORT_HORS_UE = sum(totalValue_y),
+            EXPORT_UE = sum(totalValue_x))%>%
   arrange(period)
 
 top_EXPORT_UE27_4412 <- yr_pays_EXPORT_UE27_4412 %>%
@@ -662,8 +662,8 @@ yr_pays_IMPORT_UE27_4412$proportion_x <- result12$proportion_x
 
 TOTAL_IMPORT_UE27_4412<- yr_pays_IMPORT_UE27_4412%>%
   group_by(period)%>%
-  summarise(IMPORT = sum(totalValue_y),
-            EXPORT = sum(totalValue_x))%>%
+  summarise(IMPORT_UE = sum(totalValue_y),
+            EXPORT_HORS_UE = sum(totalValue_x))%>%
   arrange(period)
 
 top_IMPORT_UE27_4412 <- yr_pays_IMPORT_UE27_4412 %>%
@@ -677,8 +677,8 @@ top_IMPORT_UE27_4412_2 <- yr_pays_IMPORT_UE27_4412 %>%
   ungroup()
 
 #VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
-solde_IMPORT_4412 <- TOTAL_EXPORT_UE27_4412$IMPORT - TOTAL_IMPORT_UE27_4412$IMPORT
-solde_EXPORT_4412 <- TOTAL_EXPORT_UE27_4412$EXPORT - TOTAL_IMPORT_UE27_4412$EXPORT
+solde_IMPORT_4412 <- TOTAL_EXPORT_UE27_4412$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4412$IMPORT_UE
+solde_EXPORT_4412 <- TOTAL_EXPORT_UE27_4412$EXPORT_UE - TOTAL_IMPORT_UE27_4412$EXPORT_HORS_UE
 balance_commerciale_4412 <- data.frame(TOTAL_EXPORT_UE27_4412$period,solde_IMPORT_4412,solde_EXPORT_4412)
 
 ##PRODUIT 4410##
@@ -703,8 +703,8 @@ yr_pays_EXPORT_UE27_4410$proportion_x <- result14$proportion_x
 
 TOTAL_EXPORT_UE27_4410<- yr_pays_EXPORT_UE27_4410%>%
   group_by(period)%>%
-  summarise(IMPORT = sum(totalValue_y),
-            EXPORT = sum(totalValue_x))%>%
+  summarise(IMPORT_HORS_UE = sum(totalValue_y),
+            EXPORT_UE = sum(totalValue_x))%>%
   arrange(period)
 
 top_EXPORT_UE27_4410 <- yr_pays_EXPORT_UE27_4410 %>%
@@ -738,8 +738,8 @@ yr_pays_IMPORT_UE27_4410$proportion_x <- result16$proportion_x
 
 TOTAL_IMPORT_UE27_4410<- yr_pays_IMPORT_UE27_4410%>%
   group_by(period)%>%
-  summarise(IMPORT = sum(totalValue_y),
-            EXPORT = sum(totalValue_x))%>%
+  summarise(IMPORT_UE = sum(totalValue_y),
+            EXPORT_HORS_UE = sum(totalValue_x))%>%
   arrange(period)
 
 top_IMPORT_UE27_4410 <- yr_pays_IMPORT_UE27_4410 %>%
@@ -753,8 +753,8 @@ top_IMPORT_UE27_4410_2 <- yr_pays_IMPORT_UE27_4410 %>%
   ungroup()
 
 #VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
-solde_IMPORT_4410 <- TOTAL_EXPORT_UE27_4410$IMPORT - TOTAL_IMPORT_UE27_4410$IMPORT
-solde_EXPORT_4410 <- TOTAL_EXPORT_UE27_4410$EXPORT - TOTAL_IMPORT_UE27_4410$EXPORT
+solde_IMPORT_4410 <- TOTAL_EXPORT_UE27_4410$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4410$IMPORT_UE
+solde_EXPORT_4410 <- TOTAL_EXPORT_UE27_4410$EXPORT_UE - TOTAL_IMPORT_UE27_4410$EXPORT_HORS_UE
 balance_commerciale_4410 <- data.frame(TOTAL_EXPORT_UE27_4410$period,solde_IMPORT_4410,solde_EXPORT_4410)
 
 ##PRODUIT 4407##
@@ -779,8 +779,8 @@ yr_pays_EXPORT_UE27_4407$proportion_x <- result18$proportion_x
 
 TOTAL_EXPORT_UE27_4407<- yr_pays_EXPORT_UE27_4407%>%
   group_by(period)%>%
-  summarise(IMPORT = sum(totalValue_y),
-            EXPORT = sum(totalValue_x))%>%
+  summarise(IMPORT_HORS_UE = sum(totalValue_y),
+            EXPORT_UE = sum(totalValue_x))%>%
   arrange(period)
 
 top_EXPORT_UE27_4407 <- yr_pays_EXPORT_UE27_4407 %>%
@@ -814,8 +814,8 @@ yr_pays_IMPORT_UE27_4407$proportion_x <- result20$proportion_x
 
 TOTAL_IMPORT_UE27_4407<- yr_pays_IMPORT_UE27_4407%>%
   group_by(period)%>%
-  summarise(IMPORT = sum(totalValue_y),
-            EXPORT = sum(totalValue_x))%>%
+  summarise(IMPORT_UE = sum(totalValue_y),
+            EXPORT_HORS_UE = sum(totalValue_x))%>%
   arrange(period)
 
 top_IMPORT_UE27_4407 <- yr_pays_IMPORT_UE27_4407 %>%
@@ -829,18 +829,368 @@ top_IMPORT_UE27_4407_2 <- yr_pays_IMPORT_UE27_4407 %>%
   ungroup()
 
 #VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
-solde_IMPORT_4407 <- TOTAL_EXPORT_UE27_4407$IMPORT - TOTAL_IMPORT_UE27_4407$IMPORT
-solde_EXPORT_4407 <- TOTAL_EXPORT_UE27_4407$EXPORT - TOTAL_IMPORT_UE27_4407$EXPORT
+solde_IMPORT_4407 <- TOTAL_EXPORT_UE27_4407$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4407$IMPORT_UE
+solde_EXPORT_4407 <- TOTAL_EXPORT_UE27_4407$EXPORT_UE - TOTAL_IMPORT_UE27_4407$EXPORT_HORS_UE
 balance_commerciale_4407 <- data.frame(TOTAL_EXPORT_UE27_4407$period,solde_IMPORT_4407,solde_EXPORT_4407)
 
 balance_commerciale_UE27<- EXPORT_UE27_440131%>%
   group_by(period)%>%
   summarise(declaration_export = sum(primaryValue.x, na.rm = TRUE),
             declaration_import= sum(primaryValue.y, na.rm = TRUE), .groups = 'drop')
+somme_proportion
 #####AFFICHAGE GRAPHIQUE DES DONNEES UN COMTRADE#####
 install.packages("ggplot2")
 library("ggplot2")
-##EVOLUTION DE LA VALEUR DU COMMERCE DE PELLETS AU COURS DU TEMPS##
+install.packages("tidyr")
+library(tidyr)
+#####SUIVI DE LA VALEUR DES MARCHANDISES AU COURS DU TEMPS#####
+##EVOLUTION DE LA VALEUR DE 440131##
+IMPORT_EXPORT_440131 = full_join(TOTAL_EXPORT_UE27_440131,TOTAL_IMPORT_UE27_440131, by = "period")
+IMPORT_EXPORT_440131 <- pivot_longer(IMPORT_EXPORT_440131, cols = c("IMPORT_UE", "EXPORT_UE","IMPORT_HORS_UE","EXPORT_HORS_UE"), names_to = "Type", values_to = "Value")
+
+ggplot(IMPORT_EXPORT_440131, aes(x = period , y =Value, color = Type)) +
+  geom_line() +
+  geom_point() +
+  scale_color_manual(values = c("IMPORT_UE" = "red", "EXPORT_HORS_UE" = "red","IMPORT_HORS_UE"="black","EXPORT_UE"="black")) +
+  labs(title = "Import/Export de 440131 au cours du temps",
+       x = "Année",
+       y = "Valeur économique",
+       color = "Type de commerce") +
+  theme_minimal()
+
+##EVOLUTION DE LA VALEUR DE 4418##
+IMPORT_EXPORT_4418 = full_join(TOTAL_EXPORT_UE27_4418,TOTAL_IMPORT_UE27_4418, by = "period")
+IMPORT_EXPORT_4418 <- pivot_longer(IMPORT_EXPORT_4418, cols = c("IMPORT_UE", "EXPORT_UE","IMPORT_HORS_UE","EXPORT_HORS_UE"), names_to = "Type", values_to = "Value")
+
+ggplot(IMPORT_EXPORT_4418, aes(x = period , y =Value, color = Type)) +
+  geom_line() +
+  geom_point() +
+  scale_color_manual(values = c("IMPORT_UE" = "red", "EXPORT_HORS_UE" = "red","IMPORT_HORS_UE"="black","EXPORT_UE"="black")) +
+  labs(title = "Import/Export de 4418 au cours du temps",
+       x = "Année",
+       y = "Valeur économique",
+       color = "Type de commerce") +
+  theme_minimal()
+
+##EVOLUTION DE LA VALEUR DE 4412##
+IMPORT_EXPORT_4412 = full_join(TOTAL_EXPORT_UE27_4412,TOTAL_IMPORT_UE27_4412, by = "period")
+IMPORT_EXPORT_4412 <- pivot_longer(IMPORT_EXPORT_4412, cols = c("IMPORT_UE", "EXPORT_UE","IMPORT_HORS_UE","EXPORT_HORS_UE"), names_to = "Type", values_to = "Value")
+
+ggplot(IMPORT_EXPORT_4412, aes(x = period , y =Value, color = Type)) +
+  geom_line() +
+  geom_point() +
+  scale_color_manual(values = c("IMPORT_UE" = "red", "EXPORT_HORS_UE" = "red","IMPORT_HORS_UE"="black","EXPORT_UE"="black")) +
+  labs(title = "Import/Export de 4412 au cours du temps",
+       x = "Année",
+       y = "Valeur économique",
+       color = "Type de commerce") +
+  theme_minimal()
+
+##EVOLUTION DE LA VALEUR DE 4410##
+IMPORT_EXPORT_4410 = full_join(TOTAL_EXPORT_UE27_4410,TOTAL_IMPORT_UE27_4410, by = "period")
+IMPORT_EXPORT_4410 <- pivot_longer(IMPORT_EXPORT_4410, cols = c("IMPORT_UE", "EXPORT_UE","IMPORT_HORS_UE","EXPORT_HORS_UE"), names_to = "Type", values_to = "Value")
+
+ggplot(IMPORT_EXPORT_4410, aes(x = period , y =Value, color = Type)) +
+  geom_line() +
+  geom_point() +
+  scale_color_manual(values = c("IMPORT_UE" = "red", "EXPORT_HORS_UE" = "red","IMPORT_HORS_UE"="black","EXPORT_UE"="black")) +
+  labs(title = "Import/Export de 4410 au cours du temps",
+       x = "Année",
+       y = "Valeur économique",
+       color = "Type de commerce") +
+  theme_minimal()
+
+##EVOLUTION DE LA VALEUR DE 4407##
+IMPORT_EXPORT_4407 = full_join(TOTAL_EXPORT_UE27_4407,TOTAL_IMPORT_UE27_4407, by = "period")
+IMPORT_EXPORT_4407 <- pivot_longer(IMPORT_EXPORT_4407, cols = c("IMPORT_UE", "EXPORT_UE","IMPORT_HORS_UE","EXPORT_HORS_UE"), names_to = "Type", values_to = "Value")
+
+ggplot(IMPORT_EXPORT_4407, aes(x = period , y =Value, color = Type)) +
+  geom_line() +
+  geom_point() +
+  scale_color_manual(values = c("IMPORT_UE" = "red", "EXPORT_HORS_UE" = "red","IMPORT_HORS_UE"="black","EXPORT_UE"="black")) +
+  labs(title = "Import/Export de 4407 au cours du temps",
+       x = "Année",
+       y = "Valeur économique",
+       color = "Type de commerce") +
+  theme_minimal()
+
+#####EVOLUTION DES 5 PRINCIPAUX PAYS DE DESTINATION D'EXPORTS EUROPEEN#####
+##POUR LE PRODUIT 440131##
+#EXPORT#
+custom_colors = c("cyan","orange","blue","black","pink","darkgreen","purple","brown","green","violet")
+
+ggplot(top_EXPORT_UE27_440131, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE export 440131 (basé sur déclaration import)",
+       x = "Année",
+       y = "Proportion des exports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+ggplot(top_EXPORT_UE27_440131_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE export 440131 (basé sur déclaration export)",
+       x = "Année",
+       y = "Proportion des exports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+#IMPORT#
+ggplot(top_IMPORT_UE27_440131, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE import 440131 (basé sur déclaration import)",
+       x = "Année",
+       y = "Proportion des imports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+ggplot(top_IMPORT_UE27_440131_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE import 440131 (basé sur déclaration export)",
+       x = "Année",
+       y = "Proportion des imports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+##POUR LE PRODUIT 4418##
+#EXPORT#
+ggplot(top_EXPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE export 4418 (basé sur déclaration import)",
+       x = "Année",
+       y = "Proportion des exports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+ggplot(top_EXPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
+  geom_bar(stat = "identity", position = "fill",) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE export 4418 (basé sur déclaration export)",
+       x = "Année",
+       y = "Proportion des exports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+#IMPORT#
+ggplot(top_IMPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE import 4418 (basé sur déclaration import)",
+       x = "Année",
+       y = "Proportion des imports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+ggplot(top_IMPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE import 4418 (basé sur déclaration export)",
+       x = "Année",
+       y = "Proportion des imports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+##POUR LE PRODUIT 4412##
+#EXPORT#
+ggplot(top_EXPORT_UE27_4412, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE export 4412 (basé sur déclaration import)",
+       x = "Année",
+       y = "Proportion des exports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+ggplot(top_EXPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE export 4412 (basé sur déclaration export)",
+       x = "Année",
+       y = "Proportion des exports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+#IMPORT#
+ggplot(top_IMPORT_UE27_4412, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE import 4412 (basé sur déclaration import)",
+       x = "Année",
+       y = "Proportion des imports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+ggplot(top_IMPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE import 4412 (basé sur déclaration export)",
+       x = "Année",
+       y = "Proportion des imports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+##POUR LE PRODUIT 4410##
+#EXPORT#
+ggplot(top_EXPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE export 4410 (basé sur déclaration import)",
+       x = "Année",
+       y = "Proportion des exports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+ggplot(top_EXPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE export 4410 (basé sur déclaration export)",
+       x = "Année",
+       y = "Proportion des exports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+#IMPORT#
+ggplot(top_IMPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE import 4410 (basé sur déclaration import)",
+       x = "Année",
+       y = "Proportion des imports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+ggplot(top_IMPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE import 4410 (basé sur déclaration export)",
+       x = "Année",
+       y = "Proportion des imports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+##POUR LE PRODUIT 4407##
+#EXPORT#
+ggplot(top_EXPORT_UE27_4407, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE export 4407 (basé sur déclaration import)",
+       x = "Année",
+       y = "Proportion des exports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+ggplot(top_EXPORT_UE27_4407_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE export 4407 (basé sur déclaration export)",
+       x = "Année",
+       y = "Proportion des exports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+#IMPORT#
+ggplot(top_IMPORT_UE27_4407, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE import 4407 (basé sur déclaration import)",
+       x = "Année",
+       y = "Proportion des imports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+
+ggplot(top_IMPORT_UE27_4407_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = custom_colors) +
+  labs(title = "partenaires principaux UE import 4407 (basé sur déclaration export)",
+       x = "Année",
+       y = "Proportion des imports",
+       fill = "Pays partenaires") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
 
 ######PARTIE DONNEES FAOSTAT######
 uno<- read.csv2("./raw_data/TAB_FAOSTAT.csv",sep = ",")
