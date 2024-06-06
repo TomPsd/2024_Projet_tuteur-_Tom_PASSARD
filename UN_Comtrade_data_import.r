@@ -70,6 +70,7 @@ citation("reticulate")
 citation("rstudioapi")
 citation("ggplot2")
 citation("dplyr")
+citation("tidyr")
 #####IMPORTATION DU JEU DE DONNEES 4418#####
 
 # Indicate anaconda environment
@@ -837,7 +838,6 @@ balance_commerciale_UE27<- EXPORT_UE27_440131%>%
   group_by(period)%>%
   summarise(declaration_export = sum(primaryValue.x, na.rm = TRUE),
             declaration_import= sum(primaryValue.y, na.rm = TRUE), .groups = 'drop')
-somme_proportion
 #####AFFICHAGE GRAPHIQUE DES DONNEES UN COMTRADE#####
 install.packages("ggplot2")
 library("ggplot2")
@@ -914,10 +914,11 @@ ggplot(IMPORT_EXPORT_4407, aes(x = period , y =Value, color = Type)) +
        color = "Type de commerce") +
   theme_minimal()
 
-#####EVOLUTION DES 5 PRINCIPAUX PAYS DE DESTINATION D'EXPORTS EUROPEEN#####
+#####EVOLUTION DES 5 PRINCIPAUX PAYS DE DESTINATION D'EXPORTS/IMPORTS EUROPEEN#####
+
 ##POUR LE PRODUIT 440131##
 #EXPORT#
-custom_colors = c("cyan","orange","blue","black","pink","darkgreen","purple","brown","green","violet")
+custom_colors = c("cyan","orange","blue","black","pink","darkgreen","purple","brown","green","violet","red","aquamarine","grey")
 
 ggplot(top_EXPORT_UE27_440131, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -944,6 +945,9 @@ ggplot(top_EXPORT_UE27_440131_2, aes(x = factor(period), y = proportion_x, fill 
   theme(
     plot.title = element_text(size = 11)
   )
+
+somme_proportions_440131_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_440131, sum)
+somme_proportions_440131_E_x <- aggregate(proportion_x ~ period, top_EXPORT_UE27_440131, sum)
 
 #IMPORT#
 ggplot(top_IMPORT_UE27_440131, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
@@ -972,6 +976,9 @@ ggplot(top_IMPORT_UE27_440131_2, aes(x = factor(period), y = proportion_x, fill 
     plot.title = element_text(size = 11)
   )
 
+somme_proportions_440131_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_440131, sum)
+somme_proportions_440131_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_440131, sum)
+
 ##POUR LE PRODUIT 4418##
 #EXPORT#
 ggplot(top_EXPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
@@ -984,7 +991,8 @@ ggplot(top_EXPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
 
 ggplot(top_EXPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
@@ -997,8 +1005,12 @@ ggplot(top_EXPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
+
+somme_proportions_4418_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_4418, sum)
+somme_proportions_4418_E_x <- aggregate(proportion_x ~ period, top_EXPORT_UE27_4418, sum)
 
 #IMPORT#
 ggplot(top_IMPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
@@ -1011,7 +1023,8 @@ ggplot(top_IMPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
 
 ggplot(top_IMPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
@@ -1024,8 +1037,12 @@ ggplot(top_IMPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
+
+somme_proportions_4418_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4418, sum)
+somme_proportions_4418_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_4418, sum)
 
 ##POUR LE PRODUIT 4412##
 #EXPORT#
@@ -1039,7 +1056,8 @@ ggplot(top_EXPORT_UE27_4412, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
 
 ggplot(top_EXPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
@@ -1052,8 +1070,12 @@ ggplot(top_EXPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
+
+somme_proportions_4412_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_4412, sum)
+somme_proportions_4412_E_x <- aggregate(proportion_x ~ period, top_EXPORT_UE27_4412, sum)
 
 #IMPORT#
 ggplot(top_IMPORT_UE27_4412, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
@@ -1066,7 +1088,8 @@ ggplot(top_IMPORT_UE27_4412, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
 
 ggplot(top_IMPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
@@ -1079,8 +1102,12 @@ ggplot(top_IMPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
+
+somme_proportions_440131_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4412, sum)
+somme_proportions_440131_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_4412, sum)
 
 ##POUR LE PRODUIT 4410##
 #EXPORT#
@@ -1094,7 +1121,8 @@ ggplot(top_EXPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
 
 ggplot(top_EXPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
@@ -1107,8 +1135,12 @@ ggplot(top_EXPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
+
+somme_proportions_4410_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_4410, sum)
+somme_proportions_4410_E_x <- aggregate(proportion_x ~ period, top_EXPORT_UE27_4410, sum)
 
 #IMPORT#
 ggplot(top_IMPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
@@ -1121,7 +1153,8 @@ ggplot(top_IMPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
 
 ggplot(top_IMPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
@@ -1134,8 +1167,12 @@ ggplot(top_IMPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
+
+somme_proportions_4410_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4410, sum)
+somme_proportions_4410_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_4410, sum)
 
 ##POUR LE PRODUIT 4407##
 #EXPORT#
@@ -1149,7 +1186,8 @@ ggplot(top_EXPORT_UE27_4407, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
 
 ggplot(top_EXPORT_UE27_4407_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
@@ -1162,8 +1200,12 @@ ggplot(top_EXPORT_UE27_4407_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
+
+somme_proportions_4407_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_4407, sum)
+somme_proportions_4407_E_x <- aggregate(proportion_x ~ period, top_EXPORT_UE27_4407, sum)
 
 #IMPORT#
 ggplot(top_IMPORT_UE27_4407, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
@@ -1176,7 +1218,8 @@ ggplot(top_IMPORT_UE27_4407, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
 
 ggplot(top_IMPORT_UE27_4407_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
@@ -1189,8 +1232,12 @@ ggplot(top_IMPORT_UE27_4407_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 11),
+    axis.text.x = element_blank()
   )
+
+somme_proportions_4407_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4407, sum)
+somme_proportions_4407_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_4407, sum)
 
 ######PARTIE DONNEES FAOSTAT######
 uno<- read.csv2("./raw_data/TAB_FAOSTAT.csv",sep = ",")
@@ -1216,10 +1263,10 @@ import_pellets = autoconso_pellets[autoconso_pellets$Element=="Import Quantity",
 production_pellets = autoconso_pellets[autoconso_pellets$Element== "Production",]
 
 calcul_autoconso_pellets = production_pellets$somme+(import_pellets$somme - export_pellets$somme)
-autoconsommation_pellets = data.frame(c(2012:2020),import_pellets$somme,export_pellets$somme,production_pellets$somme,calcul_autoconso_pellets)
+autoconsommation_pellets = data.frame("period"= c(2012:2020),import_pellets$somme,export_pellets$somme,production_pellets$somme,calcul_autoconso_pellets)
 autoconsommation_pellets$proportion_production = autoconsommation_pellets$production_pellets.somme/autoconsommation_pellets$calcul_autoconso_pellets
 autoconsommation_pellets$proportion_importation = autoconsommation_pellets$import_pellets.somme/autoconsommation_pellets$calcul_autoconso_pellets
-autoconsommation_pellets$excedents = (autoconsommation_pellets$proportion_production+autoconsommation_pellets$proportion_importation)-1
+autoconsommation_pellets$total = (autoconsommation_pellets$proportion_production+autoconsommation_pellets$proportion_importation)
 
 ##SAWNWOOD##
 Sawnwood = uno[uno$Item=="Sawnwood",]
@@ -1237,10 +1284,10 @@ import_sawnwood = autoconso_sawnwood[autoconso_sawnwood$Element=="Import Quantit
 production_sawnwood = autoconso_sawnwood[autoconso_sawnwood$Element== "Production",]
 
 calcul_autoconso_sawnwood = production_sawnwood$somme+(import_sawnwood$somme - export_sawnwood$somme)
-autoconsommation_sawnwood = data.frame(c(2000:2020),import_sawnwood$somme,export_sawnwood$somme,production_sawnwood$somme,calcul_autoconso_sawnwood)
+autoconsommation_sawnwood = data.frame("period"=c(2000:2020),import_sawnwood$somme,export_sawnwood$somme,production_sawnwood$somme,calcul_autoconso_sawnwood)
 autoconsommation_sawnwood$proportion_production = autoconsommation_sawnwood$production_sawnwood.somme/autoconsommation_sawnwood$calcul_autoconso_sawnwood
 autoconsommation_sawnwood$proportion_importation = autoconsommation_sawnwood$import_sawnwood.somme/autoconsommation_sawnwood$calcul_autoconso_sawnwood
-autoconsommation_sawnwood$excedents = (autoconsommation_sawnwood$proportion_production+autoconsommation_sawnwood$proportion_importation)-1
+autoconsommation_sawnwood$total = (autoconsommation_sawnwood$proportion_production+autoconsommation_sawnwood$proportion_importation)
 
 ##WOOD-BASED PANELS
 WBP = uno[uno$Item=="Wood-based panels",]
@@ -1258,10 +1305,10 @@ import_WBP = autoconso_WBP[autoconso_WBP$Element=="Import Quantity",]
 production_WBP = autoconso_WBP[autoconso_WBP$Element== "Production",]
 
 calcul_autoconso_WBP = production_WBP$somme+(import_WBP$somme - export_WBP$somme)
-autoconsommation_WBP = data.frame(c(2000:2020),import_WBP$somme,export_WBP$somme,production_WBP$somme,calcul_autoconso_WBP)
+autoconsommation_WBP = data.frame("period"=c(2000:2020),import_WBP$somme,export_WBP$somme,production_WBP$somme,calcul_autoconso_WBP)
 autoconsommation_WBP$proportion_production = autoconsommation_WBP$production_WBP.somme/autoconsommation_WBP$calcul_autoconso_WBP
 autoconsommation_WBP$proportion_importation = autoconsommation_WBP$import_WBP.somme/autoconsommation_WBP$calcul_autoconso_WBP
-autoconsommation_WBP$excedents = (autoconsommation_WBP$proportion_production+autoconsommation_WBP$proportion_importation)-1
+autoconsommation_WBP$total = (autoconsommation_WBP$proportion_production+autoconsommation_WBP$proportion_importation)
 
 ##PARTICLE BOARD##
 PB=uno[uno$Item=="Particle board",]
@@ -1279,10 +1326,10 @@ import_PB = autoconso_PB[autoconso_PB$Element=="Import Quantity",]
 production_PB = autoconso_PB[autoconso_PB$Element== "Production",]
 
 calcul_autoconso_PB = production_PB$somme+(import_PB$somme - export_PB$somme)
-autoconsommation_PB = data.frame(c(2000:2020),import_PB$somme,export_PB$somme,production_PB$somme,calcul_autoconso_PB)
+autoconsommation_PB = data.frame("period"=c(2000:2020),import_PB$somme,export_PB$somme,production_PB$somme,calcul_autoconso_PB)
 autoconsommation_PB$proportion_production = autoconsommation_PB$production_PB.somme/autoconsommation_PB$calcul_autoconso_PB
 autoconsommation_PB$proportion_importation = autoconsommation_PB$import_PB.somme/autoconsommation_PB$calcul_autoconso_PB
-autoconsommation_PB$excedents = (autoconsommation_PB$proportion_production+autoconsommation_PB$proportion_importation)-1
+autoconsommation_PB$total = (autoconsommation_PB$proportion_production+autoconsommation_PB$proportion_importation)
 
 ##OSB##
 OSB=uno[uno$Item=="OSB",]
@@ -1300,8 +1347,89 @@ import_OSB = autoconso_OSB[autoconso_OSB$Element=="Import Quantity",]
 production_OSB = autoconso_OSB[autoconso_OSB$Element== "Production",]
 
 calcul_autoconso_OSB = production_OSB$somme+(import_OSB$somme - export_OSB$somme)
-autoconsommation_OSB = data.frame(c(2000:2020),import_OSB$somme,export_OSB$somme,production_OSB$somme,calcul_autoconso_OSB)
+autoconsommation_OSB = data.frame("period"=c(2000:2020),import_OSB$somme,export_OSB$somme,production_OSB$somme,calcul_autoconso_OSB)
 autoconsommation_OSB$proportion_production = autoconsommation_OSB$production_OSB.somme/autoconsommation_OSB$calcul_autoconso_OSB
 autoconsommation_OSB$proportion_importation = autoconsommation_OSB$import_OSB.somme/autoconsommation_OSB$calcul_autoconso_OSB
-autoconsommation_OSB$excedents = (autoconsommation_OSB$proportion_production+autoconsommation_OSB$proportion_importation)-1
+autoconsommation_OSB$total = (autoconsommation_OSB$proportion_production+autoconsommation_OSB$proportion_importation)
 
+
+#####RENDEMENT GRAPHIQUE DES DONNEES FAOSTAT#####
+ggplot(autoconsommation_pellets, aes(x = period , y = calcul_autoconso_pellets)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "évolution autoconsommation de granulés de bois en UE",
+       x = "Année",
+       y = "quantité en tonne")+
+  theme_minimal()+
+theme(
+  plot.title = element_text(size = 11)
+)
+auto_conso_WBP_SW = full_join(autoconsommation_WBP,autoconsommation_sawnwood, by = "period")
+auto_conso_WBP_SW <- pivot_longer(auto_conso_WBP_SW, cols = c("calcul_autoconso_WBP", "calcul_autoconso_sawnwood"), names_to = "Type", values_to = "Value")
+
+
+ggplot(auto_conso_WBP_SW, aes(x = period , y =Value, color = Type)) +
+  geom_line() +
+  geom_point() +
+  scale_color_manual(values = c("calcul_autoconso_WBP" = "red","calcul_autoconso_sawnwood"="black")) +
+  labs(title = "Evolution autoconsommation panneaux de bois et bois sciés en UE",
+       x = "Année",
+       y = "quantité en m3",
+       color = "Type de marchandise") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
+granules_de_bois = data.frame("année"= autoconsommation_pellets$period, "part de production" = autoconsommation_pellets$proportion_production, "part d'importations" =autoconsommation_pellets$proportion_importation, "total à disposition" = autoconsommation_pellets$total)
+granules_de_bois <- pivot_longer(granules_de_bois, cols = c("part.de.production", "part.d.importations","total.à.disposition"), names_to = "Type", values_to = "Value")
+
+ggplot(granules_de_bois, aes(x = année , y =Value, color = Type)) +
+  geom_line() +
+  geom_point() +
+  geom_abline(intercept = 1, slope = 0, color = "red")+
+  scale_y_continuous(limits = c(0, 2), breaks = seq(0, 2, by = 0.2), labels = scales::comma)+
+  labs(title = "évolution part import/production dans autoconsommation granulés de bois",
+       x = "Année",
+       y = "part dans l'autoconsommation",
+       color = "répartition") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 10),
+    axis.text.x = element_blank()
+  )
+
+panneaux_de_bois = data.frame("année"= autoconsommation_WBP$period, "part de production" = autoconsommation_WBP$proportion_production, "part d'importations" =autoconsommation_WBP$proportion_importation, "total à disposition" = autoconsommation_WBP$total)
+panneaux_de_bois <- pivot_longer(panneaux_de_bois, cols = c("part.de.production", "part.d.importations","total.à.disposition"), names_to = "Type", values_to = "Value")
+
+ggplot(panneaux_de_bois, aes(x = année , y =Value, color = Type)) +
+  geom_line() +
+  geom_point() +
+  geom_abline(intercept = 1, slope = 0, color = "red")+
+  scale_y_continuous(limits = c(0, 2), breaks = seq(0, 2, by = 0.2), labels = scales::comma)+
+  labs(title = "évolution part import/production dans l'autoconsommation panneaux de bois",
+       x = "Année",
+       y = "part dans l'autoconsommation",
+       color = "répartition") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 10),
+    axis.text.x = element_blank()
+  )
+
+bois_scies = data.frame("année"= autoconsommation_sawnwood$period, "part de production" = autoconsommation_sawnwood$proportion_production, "part d'importations" =autoconsommation_sawnwood$proportion_importation, "total à disposition" = autoconsommation_sawnwood$total)
+bois_scies <- pivot_longer(bois_scies, cols = c("part.de.production", "part.d.importations","total.à.disposition"), names_to = "Type", values_to = "Value")
+
+ggplot(bois_scies, aes(x = année , y =Value, color = Type)) +
+  geom_line() +
+  geom_point() +
+  geom_abline(intercept = 1, slope = 0, color = "red")+
+  scale_y_continuous(limits = c(0, 2), breaks = seq(0, 2, by = 0.2), labels = scales::comma)+
+  labs(title = "évolution part import/production dans l'autoconsommation bois sciés",
+       x = "Année",
+       y = "part dans l'autoconsommation",
+       color = "répartition") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 10),
+    axis.text.x = element_blank()
+  )
