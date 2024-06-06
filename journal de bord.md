@@ -174,3 +174,8 @@ création cdes graphiques R
 création des graphiques sur R, rédaction résultats
 ## Après-midi
 création des graphiques sur R, rédaction résultats
+# Journée du 06 juin
+## Matinée
+finalisation du script R
+## Après-midi
+script finalisé et rédaction de la partie résultats
