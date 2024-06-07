@@ -378,12 +378,14 @@ EXPORT_UE27_440131 <- mirror_flow_440131[grepl(pattern, mirror_flow_440131$repor
                                            !(grepl(pattern, mirror_flow_440131$partnerDesc)),]
 EXPORT_UE27_440131$primaryValue.x<-as.numeric(EXPORT_UE27_440131$primaryValue.x)
 EXPORT_UE27_440131$primaryValue.y<-as.numeric(EXPORT_UE27_440131$primaryValue.y)
+EXPORT_UE27_440131$mediane = (EXPORT_UE27_440131$primaryValue.x+EXPORT_UE27_440131$primaryValue.y)/2
 str(EXPORT_UE27_440131)
 #IMPORTATION UE27 DE 440131#
 IMPORT_UE27_440131 <- mirror_flow_440131[!(grepl(pattern, mirror_flow_440131$reporterDesc))&
                                            grepl(pattern, mirror_flow_440131$partnerDesc),]
 IMPORT_UE27_440131$primaryValue.x<-as.numeric(IMPORT_UE27_440131$primaryValue.x)
 IMPORT_UE27_440131$primaryValue.y<-as.numeric(IMPORT_UE27_440131$primaryValue.y)
+IMPORT_UE27_440131$mediane = (IMPORT_UE27_440131$primaryValue.x+IMPORT_UE27_440131$primaryValue.y)/2
 str(IMPORT_UE27_440131)
 ##PRODUIT 4418##
 
@@ -844,75 +846,166 @@ library("ggplot2")
 install.packages("tidyr")
 library(tidyr)
 #####SUIVI DE LA VALEUR DES MARCHANDISES AU COURS DU TEMPS#####
+###permet de visualiser toutes les évolutions des produits en même temps mais pas conserver
+import_export_440131_4407_4410_4412_4418<-TOTAL_EXPORT_UE27_440131 %>%
+  full_join(TOTAL_IMPORT_UE27_440131, by = "period") %>%
+  full_join(TOTAL_EXPORT_UE27_4407, by = "period") %>%
+  full_join(TOTAL_IMPORT_UE27_4407, by = "period") %>%
+  full_join(TOTAL_EXPORT_UE27_4410, by = "period") %>%
+  full_join(TOTAL_IMPORT_UE27_4410, by = "period") %>%
+  full_join(TOTAL_EXPORT_UE27_4412, by = "period") %>%
+  full_join(TOTAL_IMPORT_UE27_4412, by = "period") %>%
+  full_join(TOTAL_EXPORT_UE27_4418, by = "period") %>%
+  full_join(TOTAL_IMPORT_UE27_4418, by = "period")
+import_export_440131_4407_4410_4412_4418<- data.frame("period" = import_export_440131_4407_4410_4412_4418$period,
+                                                      "Import hors UE 440131" = import_export_440131_4407_4410_4412_4418$IMPORT_HORS_UE.x,
+                                                      "Export UE 440131" = import_export_440131_4407_4410_4412_4418$EXPORT_UE.x,
+                                                      "Import UE 440131" = import_export_440131_4407_4410_4412_4418$IMPORT_UE.x,
+                                                      "Export hors UE 440131" = import_export_440131_4407_4410_4412_4418$EXPORT_HORS_UE.x,
+                                                      "Import hors UE 4407" = import_export_440131_4407_4410_4412_4418$IMPORT_HORS_UE.y,
+                                                      "Export UE 4407" = import_export_440131_4407_4410_4412_4418$EXPORT_UE.y,
+                                                      "Import UE 4407" = import_export_440131_4407_4410_4412_4418$IMPORT_UE.y,
+                                                      "Export hors UE 4407" = import_export_440131_4407_4410_4412_4418$EXPORT_HORS_UE.y,
+                                                      "Import hors UE 4410" = import_export_440131_4407_4410_4412_4418$IMPORT_HORS_UE.x.x,
+                                                      "Export UE 4410" = import_export_440131_4407_4410_4412_4418$EXPORT_UE.x.x,
+                                                      "Import UE 4410" = import_export_440131_4407_4410_4412_4418$IMPORT_UE.x.x,
+                                                      "Export hors UE 4410" = import_export_440131_4407_4410_4412_4418$EXPORT_HORS_UE.x.x,
+                                                      "Import hors UE 4412" = import_export_440131_4407_4410_4412_4418$IMPORT_HORS_UE.y.y,
+                                                      "Export UE 4412" = import_export_440131_4407_4410_4412_4418$EXPORT_UE.y.y,
+                                                      "Import UE 4412" = import_export_440131_4407_4410_4412_4418$IMPORT_UE.y.y,
+                                                      "Export hors UE 4412" = import_export_440131_4407_4410_4412_4418$EXPORT_HORS_UE.y.y,
+                                                      "Import hors UE 4418" = import_export_440131_4407_4410_4412_4418$IMPORT_HORS_UE,
+                                                      "Export UE 4418" = import_export_440131_4407_4410_4412_4418$EXPORT_UE,
+                                                      "Import UE 4418" = import_export_440131_4407_4410_4412_4418$IMPORT_UE,
+                                                      "Export hors UE 4418" = import_export_440131_4407_4410_4412_4418$EXPORT_HORS_UE)
+import_export_440131_4407_4410_4412_4418<- pivot_longer(import_export_440131_4407_4410_4412_4418, cols = c("Import.hors.UE.440131","Export.UE.440131","Import.UE.440131","Export.hors.UE.440131","Import.hors.UE.4407","Export.UE.4407","Import.UE.4407","Export.hors.UE.4407","Import.hors.UE.4410","Export.UE.4410","Import.UE.4410","Export.hors.UE.4410","Import.hors.UE.4412","Export.UE.4412","Import.UE.4412","Export.hors.UE.4412","Import.hors.UE.4418","Export.UE.4418","Import.UE.4418","Export.hors.UE.4418"),
+                                                        names_to = "Type", 
+                                                        values_to = "Value")
+
+ggplot(import_export_440131_4407_4410_4412_4418, aes(x = period , y =Value, color = Type)) +
+  geom_line() +
+  geom_point() +
+  scale_color_manual(values = c("Import.hors.UE.440131" = "red","Export.UE.440131"="red","Import.UE.440131"="orange","Export.hors.UE.440131"="orange","Import.hors.UE.4407"="blue","Export.UE.4407"="blue","Import.UE.4407"="skyblue","Export.hors.UE.4407"="skyblue","Import.hors.UE.4410"="green","Export.UE.4410"="green","Import.UE.4410"="lightgreen","Export.hors.UE.4410"="lightgreen","Import.hors.UE.4412"="black","Export.UE.4412"="black","Import.UE.4412"="grey","Export.hors.UE.4412"="grey","Import.hors.UE.4418"="purple","Export.UE.4418"="purple","Import.UE.4418"="violet","Export.hors.UE.4418"="violet")) +
+  labs(title = "Import/Export de 440131/4407/4410/4412/4418 au cours du temps",
+       x = "Année",
+       y = "Valeur économique",
+       color = "Type de commerce") +
+  theme_minimal()+
+theme(
+  plot.title = element_text(size = 9),
+  legend.text = element_text(size = 6),            # Taille de la police de la légende
+  legend.title = element_text(size = 9),           # Taille de la police du titre de la légende
+  legend.key.size = unit(0.3, "cm"),                # Taille des signes (symboles) dans la légende
+  legend.spacing.y = unit(0.2, "cm")   
+)
+
+
 ##EVOLUTION DE LA VALEUR DE 440131##
 IMPORT_EXPORT_440131 = full_join(TOTAL_EXPORT_UE27_440131,TOTAL_IMPORT_UE27_440131, by = "period")
-IMPORT_EXPORT_440131 <- pivot_longer(IMPORT_EXPORT_440131, cols = c("IMPORT_UE", "EXPORT_UE","IMPORT_HORS_UE","EXPORT_HORS_UE"), names_to = "Type", values_to = "Value")
+IMPORT_EXPORT_440131$moyenne_export = (IMPORT_EXPORT_440131$IMPORT_HORS_UE+IMPORT_EXPORT_440131$EXPORT_UE)/2
+IMPORT_EXPORT_440131$moyenne_import = (IMPORT_EXPORT_440131$IMPORT_UE+IMPORT_EXPORT_440131$EXPORT_HORS_UE)/2
 
-ggplot(IMPORT_EXPORT_440131, aes(x = period , y =Value, color = Type)) +
-  geom_line() +
-  geom_point() +
-  scale_color_manual(values = c("IMPORT_UE" = "red", "EXPORT_HORS_UE" = "red","IMPORT_HORS_UE"="black","EXPORT_UE"="black")) +
-  labs(title = "Import/Export de 440131 au cours du temps",
+ggplot(IMPORT_EXPORT_440131, aes(x = period)) +
+  geom_line(aes(y = moyenne_import, color = "moyenne_import"), size = 1) +
+  geom_line(aes(y = moyenne_export, color = "moyenne_export"), size = 1) +
+  geom_ribbon(aes(ymin = IMPORT_EXPORT_440131$EXPORT_HORS_UE, ymax = IMPORT_EXPORT_440131$IMPORT_UE), alpha = 0.2) +
+  geom_ribbon(aes(ymin = IMPORT_EXPORT_440131$EXPORT_UE, ymax = IMPORT_EXPORT_440131$IMPORT_HORS_UE), alpha = 0.2) +
+  geom_point(aes(y = moyenne_import), size = 1) +
+  geom_point(aes(y = moyenne_export), size = 1) +
+  labs(title = "Évolution de la valeur économique import/export 440131 UE",
        x = "Année",
-       y = "Valeur économique",
-       color = "Type de commerce") +
-  theme_minimal()
+       y = "valeur économique",
+       color = "type de flux") +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 10)  
+    )
 
-##EVOLUTION DE LA VALEUR DE 4418##
-IMPORT_EXPORT_4418 = full_join(TOTAL_EXPORT_UE27_4418,TOTAL_IMPORT_UE27_4418, by = "period")
-IMPORT_EXPORT_4418 <- pivot_longer(IMPORT_EXPORT_4418, cols = c("IMPORT_UE", "EXPORT_UE","IMPORT_HORS_UE","EXPORT_HORS_UE"), names_to = "Type", values_to = "Value")
 
-ggplot(IMPORT_EXPORT_4418, aes(x = period , y =Value, color = Type)) +
-  geom_line() +
-  geom_point() +
-  scale_color_manual(values = c("IMPORT_UE" = "red", "EXPORT_HORS_UE" = "red","IMPORT_HORS_UE"="black","EXPORT_UE"="black")) +
-  labs(title = "Import/Export de 4418 au cours du temps",
-       x = "Année",
-       y = "Valeur économique",
-       color = "Type de commerce") +
-  theme_minimal()
-
-##EVOLUTION DE LA VALEUR DE 4412##
-IMPORT_EXPORT_4412 = full_join(TOTAL_EXPORT_UE27_4412,TOTAL_IMPORT_UE27_4412, by = "period")
-IMPORT_EXPORT_4412 <- pivot_longer(IMPORT_EXPORT_4412, cols = c("IMPORT_UE", "EXPORT_UE","IMPORT_HORS_UE","EXPORT_HORS_UE"), names_to = "Type", values_to = "Value")
-
-ggplot(IMPORT_EXPORT_4412, aes(x = period , y =Value, color = Type)) +
-  geom_line() +
-  geom_point() +
-  scale_color_manual(values = c("IMPORT_UE" = "red", "EXPORT_HORS_UE" = "red","IMPORT_HORS_UE"="black","EXPORT_UE"="black")) +
-  labs(title = "Import/Export de 4412 au cours du temps",
-       x = "Année",
-       y = "Valeur économique",
-       color = "Type de commerce") +
-  theme_minimal()
-
-##EVOLUTION DE LA VALEUR DE 4410##
-IMPORT_EXPORT_4410 = full_join(TOTAL_EXPORT_UE27_4410,TOTAL_IMPORT_UE27_4410, by = "period")
-IMPORT_EXPORT_4410 <- pivot_longer(IMPORT_EXPORT_4410, cols = c("IMPORT_UE", "EXPORT_UE","IMPORT_HORS_UE","EXPORT_HORS_UE"), names_to = "Type", values_to = "Value")
-
-ggplot(IMPORT_EXPORT_4410, aes(x = period , y =Value, color = Type)) +
-  geom_line() +
-  geom_point() +
-  scale_color_manual(values = c("IMPORT_UE" = "red", "EXPORT_HORS_UE" = "red","IMPORT_HORS_UE"="black","EXPORT_UE"="black")) +
-  labs(title = "Import/Export de 4410 au cours du temps",
-       x = "Année",
-       y = "Valeur économique",
-       color = "Type de commerce") +
-  theme_minimal()
 
 ##EVOLUTION DE LA VALEUR DE 4407##
 IMPORT_EXPORT_4407 = full_join(TOTAL_EXPORT_UE27_4407,TOTAL_IMPORT_UE27_4407, by = "period")
-IMPORT_EXPORT_4407 <- pivot_longer(IMPORT_EXPORT_4407, cols = c("IMPORT_UE", "EXPORT_UE","IMPORT_HORS_UE","EXPORT_HORS_UE"), names_to = "Type", values_to = "Value")
+IMPORT_EXPORT_4407$moyenne_export = (IMPORT_EXPORT_4407$IMPORT_HORS_UE+IMPORT_EXPORT_4407$EXPORT_UE)/2
+IMPORT_EXPORT_4407$moyenne_import = (IMPORT_EXPORT_4407$IMPORT_UE+IMPORT_EXPORT_4407$EXPORT_HORS_UE)/2
 
-ggplot(IMPORT_EXPORT_4407, aes(x = period , y =Value, color = Type)) +
-  geom_line() +
-  geom_point() +
-  scale_color_manual(values = c("IMPORT_UE" = "red", "EXPORT_HORS_UE" = "red","IMPORT_HORS_UE"="black","EXPORT_UE"="black")) +
-  labs(title = "Import/Export de 4407 au cours du temps",
+ggplot(IMPORT_EXPORT_4407, aes(x = period)) +
+  geom_line(aes(y = moyenne_import, color = "moyenne_import"), size = 1) +
+  geom_line(aes(y = moyenne_export, color = "moyenne_export"), size = 1) +
+  geom_ribbon(aes(ymin = IMPORT_EXPORT_4407$EXPORT_HORS_UE, ymax = IMPORT_EXPORT_4407$IMPORT_UE), alpha = 0.2) +
+  geom_ribbon(aes(ymin = IMPORT_EXPORT_4407$EXPORT_UE, ymax = IMPORT_EXPORT_4407$IMPORT_HORS_UE), alpha = 0.2) +
+  geom_point(aes(y = moyenne_import), size = 1) +
+  geom_point(aes(y = moyenne_export), size = 1) +
+  labs(title = "Évolution de la valeur économique import/export 4407 UE",
        x = "Année",
-       y = "Valeur économique",
-       color = "Type de commerce") +
-  theme_minimal()
+       y = "valeur économique",
+       color = "type de flux")+
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 10)  
+  )
+
+##EVOLUTION DE LA VALEUR DE 4410##
+IMPORT_EXPORT_4410 = full_join(TOTAL_EXPORT_UE27_4410,TOTAL_IMPORT_UE27_4410, by = "period")
+IMPORT_EXPORT_4410$moyenne_export = (IMPORT_EXPORT_4410$IMPORT_HORS_UE+IMPORT_EXPORT_4410$EXPORT_UE)/2
+IMPORT_EXPORT_4410$moyenne_import = (IMPORT_EXPORT_4410$IMPORT_UE+IMPORT_EXPORT_4410$EXPORT_HORS_UE)/2
+
+ggplot(IMPORT_EXPORT_4410, aes(x = period)) +
+  geom_line(aes(y = moyenne_import, color = "moyenne_import"), size = 1) +
+  geom_line(aes(y = moyenne_export, color = "moyenne_export"), size = 1) +
+  geom_ribbon(aes(ymin = IMPORT_EXPORT_4410$EXPORT_HORS_UE, ymax = IMPORT_EXPORT_4410$IMPORT_UE), alpha = 0.2) +
+  geom_ribbon(aes(ymin = IMPORT_EXPORT_4410$EXPORT_UE, ymax = IMPORT_EXPORT_4410$IMPORT_HORS_UE), alpha = 0.2) +
+  geom_point(aes(y = moyenne_import), size = 1) +
+  geom_point(aes(y = moyenne_export), size = 1) +
+  labs(title = "Évolution de la valeur économique import/export 4410 UE",
+       x = "Année",
+       y = "valeur économique",
+       color = "type de flux")+
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 10)  
+  )
+
+##EVOLUTION DE LA VALEUR DE 4412##
+IMPORT_EXPORT_4412 = full_join(TOTAL_EXPORT_UE27_4412,TOTAL_IMPORT_UE27_4412, by = "period")
+IMPORT_EXPORT_4412$moyenne_export = (IMPORT_EXPORT_4412$IMPORT_HORS_UE+IMPORT_EXPORT_4412$EXPORT_UE)/2
+IMPORT_EXPORT_4412$moyenne_import = (IMPORT_EXPORT_4412$IMPORT_UE+IMPORT_EXPORT_4412$EXPORT_HORS_UE)/2
+
+ggplot(IMPORT_EXPORT_4412, aes(x = period)) +
+  geom_line(aes(y = moyenne_import, color = "moyenne_import"), size = 1) +
+  geom_line(aes(y = moyenne_export, color = "moyenne_export"), size = 1) +
+  geom_ribbon(aes(ymin = IMPORT_EXPORT_4412$EXPORT_HORS_UE, ymax = IMPORT_EXPORT_4412$IMPORT_UE), alpha = 0.2) +
+  geom_ribbon(aes(ymin = IMPORT_EXPORT_4412$EXPORT_UE, ymax = IMPORT_EXPORT_4412$IMPORT_HORS_UE), alpha = 0.2) +
+  geom_point(aes(y = moyenne_import), size = 1) +
+  geom_point(aes(y = moyenne_export), size = 1) +
+  labs(title = "Évolution de la valeur économique import/export 4412 UE",
+       x = "Année",
+       y = "valeur économique",
+       color = "type de flux")+
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 10)  
+  )
+
+##EVOLUTION DE LA VALEUR DE 4418##
+IMPORT_EXPORT_4418 = full_join(TOTAL_EXPORT_UE27_4418,TOTAL_IMPORT_UE27_4418, by = "period")
+IMPORT_EXPORT_4418$moyenne_export = (IMPORT_EXPORT_4418$IMPORT_HORS_UE+IMPORT_EXPORT_4418$EXPORT_UE)/2
+IMPORT_EXPORT_4418$moyenne_import = (IMPORT_EXPORT_4418$IMPORT_UE+IMPORT_EXPORT_4418$EXPORT_HORS_UE)/2
+
+ggplot(IMPORT_EXPORT_4418, aes(x = period)) +
+  geom_line(aes(y = moyenne_import, color = "moyenne_import"), size = 1) +
+  geom_line(aes(y = moyenne_export, color = "moyenne_export"), size = 1) +
+  geom_ribbon(aes(ymin = IMPORT_EXPORT_4418$EXPORT_HORS_UE, ymax = IMPORT_EXPORT_4418$IMPORT_UE), alpha = 0.2) +
+  geom_ribbon(aes(ymin = IMPORT_EXPORT_4418$EXPORT_UE, ymax = IMPORT_EXPORT_4418$IMPORT_HORS_UE), alpha = 0.2) +
+  geom_point(aes(y = moyenne_import), size = 1) +
+  geom_point(aes(y = moyenne_export), size = 1) +
+  labs(title = "Évolution de la valeur économique import/export 4418 UE",
+       x = "Année",
+       y = "valeur économique",
+       color = "type de flux")+
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 10)  
+  )
 
 #####EVOLUTION DES 5 PRINCIPAUX PAYS DE DESTINATION D'EXPORTS/IMPORTS EUROPEEN#####
 
@@ -930,8 +1023,9 @@ ggplot(top_EXPORT_UE27_440131, aes(x = factor(period), y = proportion_y, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 ggplot(top_EXPORT_UE27_440131_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -943,12 +1037,14 @@ ggplot(top_EXPORT_UE27_440131_2, aes(x = factor(period), y = proportion_x, fill 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 somme_proportions_440131_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_440131, sum)
 somme_proportions_440131_E_x <- aggregate(proportion_x ~ period, top_EXPORT_UE27_440131, sum)
-
+mean(somme_proportions_440131_E_y$proportion_y)
+mean(somme_proportions_440131_E_x$proportion_x)
 #IMPORT#
 ggplot(top_IMPORT_UE27_440131, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -960,8 +1056,8 @@ ggplot(top_IMPORT_UE27_440131, aes(x = factor(period), y = proportion_y, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
 
 ggplot(top_IMPORT_UE27_440131_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -973,12 +1069,14 @@ ggplot(top_IMPORT_UE27_440131_2, aes(x = factor(period), y = proportion_x, fill 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 somme_proportions_440131_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_440131, sum)
 somme_proportions_440131_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_440131, sum)
-
+mean(somme_proportions_440131_I_y$proportion_y)
+mean(somme_proportions_440131_I_x$proportion_x)
 ##POUR LE PRODUIT 4418##
 #EXPORT#
 ggplot(top_EXPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
@@ -991,9 +1089,8 @@ ggplot(top_EXPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
 
 ggplot(top_EXPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
   geom_bar(stat = "identity", position = "fill",) +
@@ -1005,13 +1102,13 @@ ggplot(top_EXPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
 
 somme_proportions_4418_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_4418, sum)
 somme_proportions_4418_E_x <- aggregate(proportion_x ~ period, top_EXPORT_UE27_4418, sum)
-
+mean(somme_proportions_4418_E_y$proportion_y)
+mean(somme_proportions_4418_E_x$proportion_x)
 #IMPORT#
 ggplot(top_IMPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1023,9 +1120,9 @@ ggplot(top_IMPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 ggplot(top_IMPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1037,13 +1134,14 @@ ggplot(top_IMPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 somme_proportions_4418_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4418, sum)
 somme_proportions_4418_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_4418, sum)
-
+mean(somme_proportions_4418_I_y$proportion_y)
+mean(somme_proportions_4418_I_x$proportion_x)
 ##POUR LE PRODUIT 4412##
 #EXPORT#
 ggplot(top_EXPORT_UE27_4412, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
@@ -1056,9 +1154,9 @@ ggplot(top_EXPORT_UE27_4412, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 ggplot(top_EXPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1070,13 +1168,14 @@ ggplot(top_EXPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 somme_proportions_4412_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_4412, sum)
 somme_proportions_4412_E_x <- aggregate(proportion_x ~ period, top_EXPORT_UE27_4412, sum)
-
+mean(somme_proportions_4412_E_y$proportion_y)
+mean(somme_proportions_4412_E_x$proportion_x)
 #IMPORT#
 ggplot(top_IMPORT_UE27_4412, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1088,9 +1187,9 @@ ggplot(top_IMPORT_UE27_4412, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 ggplot(top_IMPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1102,13 +1201,13 @@ ggplot(top_IMPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
 
-somme_proportions_440131_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4412, sum)
-somme_proportions_440131_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_4412, sum)
-
+somme_proportions_4412_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4412, sum)
+somme_proportions_4412_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_4412, sum)
+mean(somme_proportions_4412_I_y$proportion_y)
+mean(somme_proportions_4412_I_x$proportion_x)
 ##POUR LE PRODUIT 4410##
 #EXPORT#
 ggplot(top_EXPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
@@ -1121,9 +1220,12 @@ ggplot(top_EXPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 9),
+    axis.text.x = element_text(size =10, angle = 90),
+    legend.title = element_text(size = 9))
+
+   
+
 
 ggplot(top_EXPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1135,13 +1237,14 @@ ggplot(top_EXPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 somme_proportions_4410_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_4410, sum)
 somme_proportions_4410_E_x <- aggregate(proportion_x ~ period, top_EXPORT_UE27_4410, sum)
-
+mean(somme_proportions_4410_E_y$proportion_y)
+mean(somme_proportions_4410_E_x$proportion_x)
 #IMPORT#
 ggplot(top_IMPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1153,9 +1256,9 @@ ggplot(top_IMPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 ggplot(top_IMPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1167,13 +1270,15 @@ ggplot(top_IMPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 9),
+    axis.text.x = element_text(size =10, angle = 90),
+    legend.title = element_text(size = 9))
+
 
 somme_proportions_4410_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4410, sum)
 somme_proportions_4410_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_4410, sum)
-
+mean(somme_proportions_4410_I_y$proportion_y)
+mean(somme_proportions_4410_I_x$proportion_x)
 ##POUR LE PRODUIT 4407##
 #EXPORT#
 ggplot(top_EXPORT_UE27_4407, aes(x = factor(period), y = proportion_y, fill = reorder(partnerDesc, proportion_y))) +
@@ -1186,9 +1291,9 @@ ggplot(top_EXPORT_UE27_4407, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 ggplot(top_EXPORT_UE27_4407_2, aes(x = factor(period), y = proportion_x, fill = reorder(partnerDesc, proportion_x))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1200,13 +1305,14 @@ ggplot(top_EXPORT_UE27_4407_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 somme_proportions_4407_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_4407, sum)
 somme_proportions_4407_E_x <- aggregate(proportion_x ~ period, top_EXPORT_UE27_4407, sum)
-
+mean(somme_proportions_4407_E_y$proportion_y)
+mean(somme_proportions_4407_E_x$proportion_x)
 #IMPORT#
 ggplot(top_IMPORT_UE27_4407, aes(x = factor(period), y = proportion_y, fill = reorder(reporterDesc,proportion_y))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1218,9 +1324,9 @@ ggplot(top_IMPORT_UE27_4407, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 ggplot(top_IMPORT_UE27_4407_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
   geom_bar(stat = "identity", position = "fill") +
@@ -1232,13 +1338,45 @@ ggplot(top_IMPORT_UE27_4407_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11),
-    axis.text.x = element_blank()
-  )
+    plot.title = element_text(size = 10),
+    axis.text.x = element_text(size =10, angle = 90))
+
 
 somme_proportions_4407_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4407, sum)
 somme_proportions_4407_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_4407, sum)
+mean(somme_proportions_4407_I_y$proportion_y)
+mean(somme_proportions_4407_I_x$proportion_x)
 
+######REGROUPEMENT DES MOYENNES DES PRINCIPAUX IMPORTATEURS EXPORTATEURS#####
+mean(somme_proportions_440131_E_y$proportion_y)
+mean(somme_proportions_440131_E_x$proportion_x)
+
+mean(somme_proportions_440131_I_y$proportion_y)
+mean(somme_proportions_440131_I_x$proportion_x)
+
+mean(somme_proportions_4418_E_y$proportion_y)
+mean(somme_proportions_4418_E_x$proportion_x)
+
+mean(somme_proportions_4418_I_y$proportion_y)
+mean(somme_proportions_4418_I_x$proportion_x)
+
+mean(somme_proportions_4412_E_y$proportion_y)
+mean(somme_proportions_4412_E_x$proportion_x)
+
+mean(somme_proportions_4412_I_y$proportion_y)
+mean(somme_proportions_4412_I_x$proportion_x)
+
+mean(somme_proportions_4410_E_y$proportion_y)
+mean(somme_proportions_4410_E_x$proportion_x)
+
+mean(somme_proportions_4410_I_y$proportion_y)
+mean(somme_proportions_4410_I_x$proportion_x)
+
+mean(somme_proportions_4407_E_y$proportion_y)
+mean(somme_proportions_4407_E_x$proportion_x)
+
+mean(somme_proportions_4407_I_y$proportion_y)
+mean(somme_proportions_4407_I_x$proportion_x)
 ######PARTIE DONNEES FAOSTAT######
 uno<- read.csv2("./raw_data/TAB_FAOSTAT.csv",sep = ",")
 print(paste0("Years covered: ",
@@ -1433,3 +1571,4 @@ ggplot(bois_scies, aes(x = année , y =Value, color = Type)) +
     plot.title = element_text(size = 10),
     axis.text.x = element_blank()
   )
+
