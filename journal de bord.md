@@ -179,3 +179,9 @@ création des graphiques sur R, rédaction résultats
 finalisation du script R
 ## Après-midi
 script finalisé et rédaction de la partie résultats
+# Journée du 07 juin
+## Matinée
+Mise  à jour du script R après quelques améliorations à réaliser
+## Après-midi
+Mise à jour et finalisation du script R (normalement il ne devrait plus bouger, les graphiques ayant été entièrement mis à jour et améliorés).
+Rédaction des résultats
