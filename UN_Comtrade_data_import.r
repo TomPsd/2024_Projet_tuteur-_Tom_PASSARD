@@ -1532,8 +1532,8 @@ ggplot(granules_de_bois, aes(x = année , y =Value, color = Type)) +
        color = "répartition") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 10),
-    axis.text.x = element_blank()
+    plot.title = element_text(size = 10)
+    
   )
 
 panneaux_de_bois = data.frame("année"= autoconsommation_WBP$period, "part de production" = autoconsommation_WBP$proportion_production, "part d'importations" =autoconsommation_WBP$proportion_importation, "total à disposition" = autoconsommation_WBP$total)
@@ -1550,8 +1550,7 @@ ggplot(panneaux_de_bois, aes(x = année , y =Value, color = Type)) +
        color = "répartition") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 10),
-    axis.text.x = element_blank()
+    plot.title = element_text(size = 10)
   )
 
 bois_scies = data.frame("année"= autoconsommation_sawnwood$period, "part de production" = autoconsommation_sawnwood$proportion_production, "part d'importations" =autoconsommation_sawnwood$proportion_importation, "total à disposition" = autoconsommation_sawnwood$total)
@@ -1568,7 +1567,6 @@ ggplot(bois_scies, aes(x = année , y =Value, color = Type)) +
        color = "répartition") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 10),
-    axis.text.x = element_blank()
+    plot.title = element_text(size = 10)
   )
 
