@@ -185,3 +185,8 @@ Mise  à jour du script R après quelques améliorations à réaliser
 ## Après-midi
 Mise à jour et finalisation du script R (normalement il ne devrait plus bouger, les graphiques ayant été entièrement mis à jour et améliorés).
 Rédaction des résultats
+# Journée du 10 juin
+## Matinée
+Finalisation de la rédaction des résultats V1
+## Après-midi
+Rédaction des annexes et rédaction des remerciements. Début de rédaction de la discussion
