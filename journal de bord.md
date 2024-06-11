@@ -190,3 +190,10 @@ Rédaction des résultats
 Finalisation de la rédaction des résultats V1
 ## Après-midi
 Rédaction des annexes et rédaction des remerciements. Début de rédaction de la discussion
+# Journée du 11 juin
+## Matinée
+Mise à jour mineure du script R
+correction des résultats
+## Après-midi
+finalisation des corrections de résultats
+il reste la discussion/conclusion à rédiger, ainsi que le résumé et la bibliographie
