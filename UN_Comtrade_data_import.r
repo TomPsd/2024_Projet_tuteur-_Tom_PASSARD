@@ -531,7 +531,7 @@ top_IMPORT_UE27_440131_2 <- yr_pays_IMPORT_UE27_440131 %>%
 solde_IMPORT <- TOTAL_EXPORT_UE27_440131$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_440131$IMPORT_UE
 solde_EXPORT <- TOTAL_EXPORT_UE27_440131$EXPORT_UE - TOTAL_IMPORT_UE27_440131$EXPORT_HORS_UE
 balance_commerciale_440131 <- data.frame(TOTAL_EXPORT_UE27_440131$period,solde_IMPORT,solde_EXPORT)
-
+(solde_IMPORT+solde_EXPORT)/2
 ##PRODUIT 4418##
 #EXPORT#
 yr_pays_EXPORT_UE27_4418 <- EXPORT_UE27_4418 %>%
@@ -607,7 +607,7 @@ top_IMPORT_UE27_4418_2 <- yr_pays_IMPORT_UE27_4418 %>%
 solde_decla_IMPORT_4418 <- TOTAL_EXPORT_UE27_4418$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4418$IMPORT_UE
 solde_decla_EXPORT_4418 <- TOTAL_EXPORT_UE27_4418$EXPORT_UE - TOTAL_IMPORT_UE27_4418$EXPORT_HORS_UE
 balance_commerciale_4418 <- data.frame(TOTAL_EXPORT_UE27_4418$period,solde_decla_IMPORT_4418,solde_decla_EXPORT_4418)
-
+(solde_decla_EXPORT_4418+solde_decla_IMPORT_4418)/2
 ##PRODUIT 4412##
 #EXPORT#
 yr_pays_EXPORT_UE27_4412 <- EXPORT_UE27_4412 %>%
@@ -683,7 +683,7 @@ top_IMPORT_UE27_4412_2 <- yr_pays_IMPORT_UE27_4412 %>%
 solde_IMPORT_4412 <- TOTAL_EXPORT_UE27_4412$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4412$IMPORT_UE
 solde_EXPORT_4412 <- TOTAL_EXPORT_UE27_4412$EXPORT_UE - TOTAL_IMPORT_UE27_4412$EXPORT_HORS_UE
 balance_commerciale_4412 <- data.frame(TOTAL_EXPORT_UE27_4412$period,solde_IMPORT_4412,solde_EXPORT_4412)
-
+(solde_IMPORT_4412+solde_EXPORT_4412)/2
 ##PRODUIT 4410##
 #EXPORT#
 yr_pays_EXPORT_UE27_4410 <- EXPORT_UE27_4410 %>%
@@ -759,7 +759,7 @@ top_IMPORT_UE27_4410_2 <- yr_pays_IMPORT_UE27_4410 %>%
 solde_IMPORT_4410 <- TOTAL_EXPORT_UE27_4410$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4410$IMPORT_UE
 solde_EXPORT_4410 <- TOTAL_EXPORT_UE27_4410$EXPORT_UE - TOTAL_IMPORT_UE27_4410$EXPORT_HORS_UE
 balance_commerciale_4410 <- data.frame(TOTAL_EXPORT_UE27_4410$period,solde_IMPORT_4410,solde_EXPORT_4410)
-
+(solde_IMPORT_4410+solde_EXPORT_4410)/2
 ##PRODUIT 4407##
 #EXPORT#
 yr_pays_EXPORT_UE27_4407 <- EXPORT_UE27_4407 %>%
@@ -835,6 +835,7 @@ top_IMPORT_UE27_4407_2 <- yr_pays_IMPORT_UE27_4407 %>%
 solde_IMPORT_4407 <- TOTAL_EXPORT_UE27_4407$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4407$IMPORT_UE
 solde_EXPORT_4407 <- TOTAL_EXPORT_UE27_4407$EXPORT_UE - TOTAL_IMPORT_UE27_4407$EXPORT_HORS_UE
 balance_commerciale_4407 <- data.frame(TOTAL_EXPORT_UE27_4407$period,solde_IMPORT_4407,solde_EXPORT_4407)
+(solde_IMPORT_4407 +solde_EXPORT_4407)/2
 
 balance_commerciale_UE27<- EXPORT_UE27_440131%>%
   group_by(period)%>%
@@ -882,24 +883,6 @@ import_export_440131_4407_4410_4412_4418<- pivot_longer(import_export_440131_440
                                                         names_to = "Type", 
                                                         values_to = "Value")
 
-ggplot(import_export_440131_4407_4410_4412_4418, aes(x = period , y =Value, color = Type)) +
-  geom_line() +
-  geom_point() +
-  scale_color_manual(values = c("Import.hors.UE.440131" = "red","Export.UE.440131"="red","Import.UE.440131"="orange","Export.hors.UE.440131"="orange","Import.hors.UE.4407"="blue","Export.UE.4407"="blue","Import.UE.4407"="skyblue","Export.hors.UE.4407"="skyblue","Import.hors.UE.4410"="green","Export.UE.4410"="green","Import.UE.4410"="lightgreen","Export.hors.UE.4410"="lightgreen","Import.hors.UE.4412"="black","Export.UE.4412"="black","Import.UE.4412"="grey","Export.hors.UE.4412"="grey","Import.hors.UE.4418"="purple","Export.UE.4418"="purple","Import.UE.4418"="violet","Export.hors.UE.4418"="violet")) +
-  labs(title = "Import/Export de 440131/4407/4410/4412/4418 au cours du temps",
-       x = "Année",
-       y = "Valeur économique",
-       color = "Type de commerce") +
-  theme_minimal()+
-theme(
-  plot.title = element_text(size = 9),
-  legend.text = element_text(size = 6),            # Taille de la police de la légende
-  legend.title = element_text(size = 9),           # Taille de la police du titre de la légende
-  legend.key.size = unit(0.3, "cm"),                # Taille des signes (symboles) dans la légende
-  legend.spacing.y = unit(0.2, "cm")   
-)
-
-
 ##EVOLUTION DE LA VALEUR DE 440131##
 IMPORT_EXPORT_440131 = full_join(TOTAL_EXPORT_UE27_440131,TOTAL_IMPORT_UE27_440131, by = "period")
 IMPORT_EXPORT_440131$moyenne_export = (IMPORT_EXPORT_440131$IMPORT_HORS_UE+IMPORT_EXPORT_440131$EXPORT_UE)/2
@@ -914,7 +897,7 @@ ggplot(IMPORT_EXPORT_440131, aes(x = period)) +
   geom_point(aes(y = moyenne_export), size = 1) +
   labs(title = "Évolution de la valeur économique import/export 440131 UE",
        x = "Année",
-       y = "valeur économique",
+       y = "valeur économique en dollar",
        color = "type de flux") +
   theme_minimal()+
   theme(
@@ -937,7 +920,7 @@ ggplot(IMPORT_EXPORT_4407, aes(x = period)) +
   geom_point(aes(y = moyenne_export), size = 1) +
   labs(title = "Évolution de la valeur économique import/export 4407 UE",
        x = "Année",
-       y = "valeur économique",
+       y = "valeur économique en dollar",
        color = "type de flux")+
   theme_minimal()+
   theme(
@@ -958,7 +941,7 @@ ggplot(IMPORT_EXPORT_4410, aes(x = period)) +
   geom_point(aes(y = moyenne_export), size = 1) +
   labs(title = "Évolution de la valeur économique import/export 4410 UE",
        x = "Année",
-       y = "valeur économique",
+       y = "valeur économique en dollar",
        color = "type de flux")+
   theme_minimal()+
   theme(
@@ -979,7 +962,7 @@ ggplot(IMPORT_EXPORT_4412, aes(x = period)) +
   geom_point(aes(y = moyenne_export), size = 1) +
   labs(title = "Évolution de la valeur économique import/export 4412 UE",
        x = "Année",
-       y = "valeur économique",
+       y = "valeur économique en dollar",
        color = "type de flux")+
   theme_minimal()+
   theme(
@@ -1000,7 +983,7 @@ ggplot(IMPORT_EXPORT_4418, aes(x = period)) +
   geom_point(aes(y = moyenne_export), size = 1) +
   labs(title = "Évolution de la valeur économique import/export 4418 UE",
        x = "Année",
-       y = "valeur économique",
+       y = "valeur économique en dollar",
        color = "type de flux")+
   theme_minimal()+
   theme(
@@ -1492,10 +1475,14 @@ autoconsommation_OSB$total = (autoconsommation_OSB$proportion_production+autocon
 
 
 #####RENDEMENT GRAPHIQUE DES DONNEES FAOSTAT#####
-ggplot(autoconsommation_pellets, aes(x = period , y = calcul_autoconso_pellets)) +
+autoconsommation_pellets$conso_apparente= autoconsommation_pellets$calcul_autoconso_pellets
+autoconsommation_WBP$conso_apparente_WBP = autoconsommation_WBP$calcul_autoconso_WBP
+autoconsommation_sawnwood$conso_apparente_sawnwood = autoconsommation_sawnwood$calcul_autoconso_sawnwood
+
+ggplot(autoconsommation_pellets, aes(x = period , y = conso_apparente)) +
   geom_line() +
   geom_point() +
-  labs(title = "évolution autoconsommation de granulés de bois en UE",
+  labs(title = "évolution consommation apparente de granulés de bois en UE",
        x = "Année",
        y = "quantité en tonne")+
   theme_minimal()+
@@ -1503,20 +1490,20 @@ theme(
   plot.title = element_text(size = 11)
 )
 auto_conso_WBP_SW = full_join(autoconsommation_WBP,autoconsommation_sawnwood, by = "period")
-auto_conso_WBP_SW <- pivot_longer(auto_conso_WBP_SW, cols = c("calcul_autoconso_WBP", "calcul_autoconso_sawnwood"), names_to = "Type", values_to = "Value")
+auto_conso_WBP_SW <- pivot_longer(auto_conso_WBP_SW, cols = c("conso_apparente_WBP", "conso_apparente_sawnwood"), names_to = "Type", values_to = "Value")
 
 
 ggplot(auto_conso_WBP_SW, aes(x = period , y =Value, color = Type)) +
   geom_line() +
   geom_point() +
-  scale_color_manual(values = c("calcul_autoconso_WBP" = "red","calcul_autoconso_sawnwood"="black")) +
-  labs(title = "Evolution autoconsommation panneaux de bois et bois sciés en UE",
+  scale_color_manual(values = c("conso_apparente_WBP" = "red","conso_apparente_sawnwood"="black")) +
+  labs(title = "Evolution consommation apparente panneaux de bois et bois sciés en UE",
        x = "Année",
        y = "quantité en m3",
        color = "Type de marchandise") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 11)
+    plot.title = element_text(size = 10)
   )
 granules_de_bois = data.frame("année"= autoconsommation_pellets$period, "part de production" = autoconsommation_pellets$proportion_production, "part d'importations" =autoconsommation_pellets$proportion_importation, "total à disposition" = autoconsommation_pellets$total)
 granules_de_bois <- pivot_longer(granules_de_bois, cols = c("part.de.production", "part.d.importations","total.à.disposition"), names_to = "Type", values_to = "Value")
@@ -1526,13 +1513,13 @@ ggplot(granules_de_bois, aes(x = année , y =Value, color = Type)) +
   geom_point() +
   geom_abline(intercept = 1, slope = 0, color = "red")+
   scale_y_continuous(limits = c(0, 2), breaks = seq(0, 2, by = 0.2), labels = scales::comma)+
-  labs(title = "évolution part import/production dans autoconsommation granulés de bois",
+  labs(title = "évolution part import/production dans consommation apparente granulés de bois UE",
        x = "Année",
-       y = "part dans l'autoconsommation",
+       y = "part dans consommation apparente",
        color = "répartition") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 10)
+    plot.title = element_text(size = 9)
     
   )
 
@@ -1544,9 +1531,9 @@ ggplot(panneaux_de_bois, aes(x = année , y =Value, color = Type)) +
   geom_point() +
   geom_abline(intercept = 1, slope = 0, color = "red")+
   scale_y_continuous(limits = c(0, 2), breaks = seq(0, 2, by = 0.2), labels = scales::comma)+
-  labs(title = "évolution part import/production dans l'autoconsommation panneaux de bois",
+  labs(title = "évolution part import/production dans consommation apparente panneaux de bois UE",
        x = "Année",
-       y = "part dans l'autoconsommation",
+       y = "part dans consommation apparente",
        color = "répartition") +
   theme_minimal()+
   theme(
@@ -1561,12 +1548,14 @@ ggplot(bois_scies, aes(x = année , y =Value, color = Type)) +
   geom_point() +
   geom_abline(intercept = 1, slope = 0, color = "red")+
   scale_y_continuous(limits = c(0, 2), breaks = seq(0, 2, by = 0.2), labels = scales::comma)+
-  labs(title = "évolution part import/production dans l'autoconsommation bois sciés",
+  labs(title = "évolution part import/production dans consommation apparente bois sciés UE",
        x = "Année",
-       y = "part dans l'autoconsommation",
+       y = "part dans consommation apparente",
        color = "répartition") +
   theme_minimal()+
   theme(
     plot.title = element_text(size = 10)
   )
 
+raaa =top_IMPORT_UE27_4418[(top_IMPORT_UE27_4418$reporterDesc=="Czechia"),]
+mean(raaa$proportion_y)
