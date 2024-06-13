@@ -486,10 +486,27 @@ top_EXPORT_UE27_440131 <- yr_pays_EXPORT_UE27_440131 %>%
   slice_max(proportion_y, n = 5) %>%
   ungroup()
 
+others <- top_EXPORT_UE27_440131 %>%
+  group_by(period) %>%
+  summarize(partnerDesc = "Others", proportion_y = 1 - sum(proportion_y))
+
+top_EXPORT_UE27_440131 <- top_EXPORT_UE27_440131 %>%
+  bind_rows(others) %>%
+  arrange(period, desc(proportion_y))
+
+
 top_EXPORT_UE27_440131_2 <- yr_pays_EXPORT_UE27_440131 %>%
   group_by(period) %>%
   slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+others2 <- top_EXPORT_UE27_440131_2 %>%
+  group_by(period) %>%
+  summarize(partnerDesc = "Others", proportion_x = 1 - sum(proportion_x))
+
+top_EXPORT_UE27_440131_2 <- top_EXPORT_UE27_440131_2 %>%
+  bind_rows(others2) %>%
+  arrange(period, desc(proportion_x))
 
 #IMPORT#
 
@@ -522,10 +539,27 @@ top_IMPORT_UE27_440131 <- yr_pays_IMPORT_UE27_440131 %>%
   slice_max(proportion_y, n = 5) %>%
   ungroup()
 
+others3 <- top_IMPORT_UE27_440131 %>%
+  group_by(period) %>%
+  summarize(reporterDesc = "Others", proportion_y = 1 - sum(proportion_y))
+
+top_IMPORT_UE27_440131 <- top_IMPORT_UE27_440131 %>%
+  bind_rows(others3) %>%
+  arrange(period, desc(proportion_y))
+
+
 top_IMPORT_UE27_440131_2 <- yr_pays_IMPORT_UE27_440131 %>%
   group_by(period) %>%
   slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+others4 <- top_IMPORT_UE27_440131_2 %>%
+  group_by(period) %>%
+  summarize(reporterDesc = "Others", proportion_x = 1 - sum(proportion_x))
+
+top_IMPORT_UE27_440131_2 <- top_IMPORT_UE27_440131_2 %>%
+  bind_rows(others4) %>%
+  arrange(period, desc(proportion_x))
 
 #VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
 solde_IMPORT <- TOTAL_EXPORT_UE27_440131$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_440131$IMPORT_UE
@@ -563,10 +597,29 @@ top_EXPORT_UE27_4418 <- yr_pays_EXPORT_UE27_4418 %>%
   slice_max(proportion_y, n = 5) %>%
   ungroup()
 
+others5 <- top_EXPORT_UE27_4418 %>%
+  group_by(period) %>%
+  summarize(partnerDesc = "Others", proportion_y = 1 - sum(proportion_y))
+
+
+top_EXPORT_UE27_4418 <- top_EXPORT_UE27_4418 %>%
+  bind_rows(others5) %>%
+  arrange(period, desc(proportion_y))
+
+
 top_EXPORT_UE27_4418_2 <- yr_pays_EXPORT_UE27_4418 %>%
   group_by(period) %>%
   slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+others6 <- top_EXPORT_UE27_4418_2 %>%
+  group_by(period) %>%
+  summarize(partnerDesc = "Others", proportion_x = 1 - sum(proportion_x))
+
+
+top_EXPORT_UE27_4418_2 <- top_EXPORT_UE27_4418_2 %>%
+  bind_rows(others6) %>%
+  arrange(period, desc(proportion_x))
 
 #IMPORT#
 yr_pays_IMPORT_UE27_4418 <- IMPORT_UE27_4418 %>%
@@ -598,10 +651,26 @@ top_IMPORT_UE27_4418 <- yr_pays_IMPORT_UE27_4418 %>%
   slice_max(proportion_y, n = 5) %>%
   ungroup()
 
+others7 <- top_IMPORT_UE27_4418 %>%
+  group_by(period) %>%
+  summarize(reporterDesc = "Others", proportion_y = 1 - sum(proportion_y))
+
+top_IMPORT_UE27_4418 <- top_IMPORT_UE27_4418 %>%
+  bind_rows(others7) %>%
+  arrange(period, desc(proportion_y))
+
 top_IMPORT_UE27_4418_2 <- yr_pays_IMPORT_UE27_4418 %>%
   group_by(period) %>%
   slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+others8 <- top_IMPORT_UE27_4418_2 %>%
+  group_by(period) %>%
+  summarize(reporterDesc = "Others", proportion_x = 1 - sum(proportion_x))
+
+top_IMPORT_UE27_4418_2 <- top_IMPORT_UE27_4418_2 %>%
+  bind_rows(others8) %>%
+  arrange(period, desc(proportion_x))
 
 #VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
 solde_decla_IMPORT_4418 <- TOTAL_EXPORT_UE27_4418$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4418$IMPORT_UE
@@ -639,10 +708,28 @@ top_EXPORT_UE27_4412 <- yr_pays_EXPORT_UE27_4412 %>%
   slice_max(proportion_y, n = 5) %>%
   ungroup()
 
+others9 <- top_EXPORT_UE27_4412 %>%
+  group_by(period) %>%
+  summarize(partnerDesc = "Others", proportion_y = 1 - sum(proportion_y))
+
+
+top_EXPORT_UE27_4412 <- top_EXPORT_UE27_4412 %>%
+  bind_rows(others9) %>%
+  arrange(period, desc(proportion_y))
+
 top_EXPORT_UE27_4412_2 <- yr_pays_EXPORT_UE27_4412 %>%
   group_by(period) %>%
   slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+others10 <- top_EXPORT_UE27_4412_2 %>%
+  group_by(period) %>%
+  summarize(partnerDesc = "Others", proportion_x = 1 - sum(proportion_x))
+
+
+top_EXPORT_UE27_4412_2 <- top_EXPORT_UE27_4412_2 %>%
+  bind_rows(others10) %>%
+  arrange(period, desc(proportion_x))
 
 #IMPORT#
 yr_pays_IMPORT_UE27_4412 <- IMPORT_UE27_4412 %>%
@@ -674,10 +761,26 @@ top_IMPORT_UE27_4412 <- yr_pays_IMPORT_UE27_4412 %>%
   slice_max(proportion_y, n = 5) %>%
   ungroup()
 
+others11 <- top_IMPORT_UE27_4412 %>%
+  group_by(period) %>%
+  summarize(reporterDesc = "Others", proportion_y = 1 - sum(proportion_y))
+
+top_IMPORT_UE27_4412 <- top_IMPORT_UE27_4412 %>%
+  bind_rows(others11) %>%
+  arrange(period, desc(proportion_y))
+
 top_IMPORT_UE27_4412_2 <- yr_pays_IMPORT_UE27_4412 %>%
   group_by(period) %>%
   slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+others12 <- top_IMPORT_UE27_4412_2 %>%
+  group_by(period) %>%
+  summarize(reporterDesc = "Others", proportion_x = 1 - sum(proportion_x))
+
+top_IMPORT_UE27_4412_2 <- top_IMPORT_UE27_4412_2 %>%
+  bind_rows(others12) %>%
+  arrange(period, desc(proportion_x))
 
 #VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
 solde_IMPORT_4412 <- TOTAL_EXPORT_UE27_4412$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4412$IMPORT_UE
@@ -715,10 +818,28 @@ top_EXPORT_UE27_4410 <- yr_pays_EXPORT_UE27_4410 %>%
   slice_max(proportion_y, n = 5) %>%
   ungroup()
 
+others13 <- top_EXPORT_UE27_4410 %>%
+  group_by(period) %>%
+  summarize(partnerDesc = "Others", proportion_y = 1 - sum(proportion_y))
+
+
+top_EXPORT_UE27_4410 <- top_EXPORT_UE27_4410 %>%
+  bind_rows(others13) %>%
+  arrange(period, desc(proportion_y))
+
 top_EXPORT_UE27_4410_2 <- yr_pays_EXPORT_UE27_4410 %>%
   group_by(period) %>%
   slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+others14 <- top_EXPORT_UE27_4410_2 %>%
+  group_by(period) %>%
+  summarize(partnerDesc = "Others", proportion_x = 1 - sum(proportion_x))
+
+
+top_EXPORT_UE27_4410_2 <- top_EXPORT_UE27_4410_2 %>%
+  bind_rows(others14) %>%
+  arrange(period, desc(proportion_x))
 
 #IMPORT#
 yr_pays_IMPORT_UE27_4410 <- IMPORT_UE27_4410 %>%
@@ -750,10 +871,26 @@ top_IMPORT_UE27_4410 <- yr_pays_IMPORT_UE27_4410 %>%
   slice_max(proportion_y, n = 5) %>%
   ungroup()
 
+others15 <- top_IMPORT_UE27_4410 %>%
+  group_by(period) %>%
+  summarize(reporterDesc = "Others", proportion_y = 1 - sum(proportion_y))
+
+top_IMPORT_UE27_4410 <- top_IMPORT_UE27_4410 %>%
+  bind_rows(others15) %>%
+  arrange(period, desc(proportion_y))
+
 top_IMPORT_UE27_4410_2 <- yr_pays_IMPORT_UE27_4410 %>%
   group_by(period) %>%
   slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+others16 <- top_IMPORT_UE27_4410_2 %>%
+  group_by(period) %>%
+  summarize(reporterDesc = "Others", proportion_x = 1 - sum(proportion_x))
+
+top_IMPORT_UE27_4410_2 <- top_IMPORT_UE27_4410_2 %>%
+  bind_rows(others16) %>%
+  arrange(period, desc(proportion_x))
 
 #VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
 solde_IMPORT_4410 <- TOTAL_EXPORT_UE27_4410$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4410$IMPORT_UE
@@ -791,10 +928,28 @@ top_EXPORT_UE27_4407 <- yr_pays_EXPORT_UE27_4407 %>%
   slice_max(proportion_y, n = 5) %>%
   ungroup()
 
+others17 <- top_EXPORT_UE27_4407 %>%
+  group_by(period) %>%
+  summarize(partnerDesc = "Others", proportion_y = 1 - sum(proportion_y))
+
+
+top_EXPORT_UE27_4407 <- top_EXPORT_UE27_4407 %>%
+  bind_rows(others17) %>%
+  arrange(period, desc(proportion_y))
+
 top_EXPORT_UE27_4407_2 <- yr_pays_EXPORT_UE27_4407 %>%
   group_by(period) %>%
   slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+others18 <- top_EXPORT_UE27_4407_2 %>%
+  group_by(period) %>%
+  summarize(partnerDesc = "Others", proportion_x = 1 - sum(proportion_x))
+
+
+top_EXPORT_UE27_4407_2 <- top_EXPORT_UE27_4407_2 %>%
+  bind_rows(others18) %>%
+  arrange(period, desc(proportion_x))
 
 #IMPORT#
 yr_pays_IMPORT_UE27_4407 <- IMPORT_UE27_4407 %>%
@@ -826,10 +981,26 @@ top_IMPORT_UE27_4407 <- yr_pays_IMPORT_UE27_4407 %>%
   slice_max(proportion_y, n = 5) %>%
   ungroup()
 
+others19 <- top_IMPORT_UE27_4407 %>%
+  group_by(period) %>%
+  summarize(reporterDesc = "Others", proportion_y = 1 - sum(proportion_y))
+
+top_IMPORT_UE27_4407 <- top_IMPORT_UE27_4407 %>%
+  bind_rows(others19) %>%
+  arrange(period, desc(proportion_y))
+
 top_IMPORT_UE27_4407_2 <- yr_pays_IMPORT_UE27_4407 %>%
   group_by(period) %>%
   slice_max(proportion_x, n = 5) %>%
   ungroup()
+
+others20 <- top_IMPORT_UE27_4407_2 %>%
+  group_by(period) %>%
+  summarize(reporterDesc = "Others", proportion_x = 1 - sum(proportion_x))
+
+top_IMPORT_UE27_4407_2 <- top_IMPORT_UE27_4407_2 %>%
+  bind_rows(others20) %>%
+  arrange(period, desc(proportion_x))
 
 #VERIFICATION DU SOLDE DE BALANCE COMMERCIALE#
 solde_IMPORT_4407 <- TOTAL_EXPORT_UE27_4407$IMPORT_HORS_UE - TOTAL_IMPORT_UE27_4407$IMPORT_UE
@@ -1104,7 +1275,12 @@ ggplot(top_IMPORT_UE27_4418, aes(x = factor(period), y = proportion_y, fill = re
   theme_minimal()+
   theme(
     plot.title = element_text(size = 10),
-    axis.text.x = element_text(size =10, angle = 90))
+    axis.text.x = element_text(size =10, angle = 90),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9),
+    legend.key.size = unit(0.5, "cm"),
+    legend.spacing = unit(0.5, "cm")
+    )
 
 
 ggplot(top_IMPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
@@ -1118,7 +1294,13 @@ ggplot(top_IMPORT_UE27_4418_2, aes(x = factor(period), y = proportion_x, fill = 
   theme_minimal()+
   theme(
     plot.title = element_text(size = 10),
-    axis.text.x = element_text(size =10, angle = 90))
+    axis.text.x = element_text(size =10, angle = 90),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9),
+    legend.key.size = unit(0.5, "cm"),
+    legend.spacing = unit(0.5, "cm")
+  )
+
 
 
 somme_proportions_4418_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4418, sum)
@@ -1185,7 +1367,13 @@ ggplot(top_IMPORT_UE27_4412_2, aes(x = factor(period), y = proportion_x, fill = 
   theme_minimal()+
   theme(
     plot.title = element_text(size = 10),
-    axis.text.x = element_text(size =10, angle = 90))
+    axis.text.x = element_text(size =10, angle = 90),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9),
+    legend.key.size = unit(0.5, "cm"),
+    legend.spacing = unit(0.5, "cm")
+  )
+
 
 somme_proportions_4412_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4412, sum)
 somme_proportions_4412_I_x <- aggregate(proportion_x ~ period, top_IMPORT_UE27_4412, sum)
@@ -1203,9 +1391,14 @@ ggplot(top_EXPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = re
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 9),
+    plot.title = element_text(size = 10),
     axis.text.x = element_text(size =10, angle = 90),
-    legend.title = element_text(size = 9))
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9),
+    legend.key.size = unit(0.5, "cm"),
+    legend.spacing = unit(0.5, "cm")
+  )
+
 
    
 
@@ -1221,7 +1414,13 @@ ggplot(top_EXPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = 
   theme_minimal()+
   theme(
     plot.title = element_text(size = 10),
-    axis.text.x = element_text(size =10, angle = 90))
+    axis.text.x = element_text(size =10, angle = 90),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9),
+    legend.key.size = unit(0.5, "cm"),
+    legend.spacing = unit(0.5, "cm")
+  )
+
 
 
 somme_proportions_4410_E_y <- aggregate(proportion_y ~ period, top_EXPORT_UE27_4410, sum)
@@ -1240,7 +1439,13 @@ ggplot(top_IMPORT_UE27_4410, aes(x = factor(period), y = proportion_y, fill = re
   theme_minimal()+
   theme(
     plot.title = element_text(size = 10),
-    axis.text.x = element_text(size =10, angle = 90))
+    axis.text.x = element_text(size =10, angle = 90),
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9),
+    legend.key.size = unit(0.5, "cm"),
+    legend.spacing = unit(0.5, "cm")
+  )
+
 
 
 ggplot(top_IMPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = reorder(reporterDesc, proportion_x))) +
@@ -1253,9 +1458,13 @@ ggplot(top_IMPORT_UE27_4410_2, aes(x = factor(period), y = proportion_x, fill = 
        fill = "Pays partenaires") +
   theme_minimal()+
   theme(
-    plot.title = element_text(size = 9),
+    plot.title = element_text(size = 10),
     axis.text.x = element_text(size =10, angle = 90),
-    legend.title = element_text(size = 9))
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9),
+    legend.key.size = unit(0.5, "cm"),
+    legend.spacing = unit(0.5, "cm")
+  )
 
 
 somme_proportions_4410_I_y <- aggregate(proportion_y ~ period, top_IMPORT_UE27_4410, sum)
@@ -1492,7 +1701,27 @@ theme(
 auto_conso_WBP_SW = full_join(autoconsommation_WBP,autoconsommation_sawnwood, by = "period")
 auto_conso_WBP_SW <- pivot_longer(auto_conso_WBP_SW, cols = c("conso_apparente_WBP", "conso_apparente_sawnwood"), names_to = "Type", values_to = "Value")
 
-
+ggplot(autoconsommation_WBP, aes(x = period , y = conso_apparente_WBP)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "évolution consommation apparente de panneaux a base de bois",
+       x = "Année",
+       y = "quantité en m3")+
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 10)
+  )
+  
+ggplot(autoconsommation_sawnwood, aes(x = period , y = conso_apparente_sawnwood)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "évolution consommation apparente de bois sciés",
+       x = "Année",
+       y = "quantité en m3")+
+  theme_minimal()+
+  theme(
+    plot.title = element_text(size = 11)
+  )
 ggplot(auto_conso_WBP_SW, aes(x = period , y =Value, color = Type)) +
   geom_line() +
   geom_point() +
